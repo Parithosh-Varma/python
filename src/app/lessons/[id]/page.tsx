@@ -97,7 +97,7 @@ export default function LessonPage({ params }: { params: Promise<{ id: string }>
         <Card className="mb-8">
           <CardContent className="p-6">
             <div className="flex items-center gap-2 mb-4">
-              <Target className="h-5 w-5 text-blue-400" />
+              <Target className="h-5 w-5 text-primary" />
               <h3 className="font-semibold">Learning Objectives</h3>
             </div>
             <ul className="space-y-2">
@@ -185,7 +185,7 @@ export default function LessonPage({ params }: { params: Promise<{ id: string }>
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <MessageSquare className="h-5 w-5 text-blue-400" />
+                  <MessageSquare className="h-5 w-5 text-primary" />
                   Interview Questions
                 </CardTitle>
               </CardHeader>
@@ -258,7 +258,7 @@ export default function LessonPage({ params }: { params: Promise<{ id: string }>
       </Tabs>
 
       {/* Complete Button */}
-      <div className="flex items-center justify-between p-6 rounded-2xl border bg-gradient-to-r from-blue-700/10 to-blue-400/10">
+      <div className="flex items-center justify-between p-6 rounded-2xl border bg-gradient-to-r bg-primary/10">
         <div>
           <p className="font-medium">Mark as Complete</p>
           <p className="text-sm text-muted-foreground">Earn {lesson.xp_reward} XP when you complete this lesson</p>

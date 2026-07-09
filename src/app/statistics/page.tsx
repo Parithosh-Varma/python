@@ -73,12 +73,12 @@ export default function StatisticsPage() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
-            { icon: TrendingUp, label: "Current Level", value: level, color: "from-blue-700 to-blue-400" },
+            { icon: TrendingUp, label: "Current Level", value: level, color: "bg-primary" },
             { icon: Zap, label: "Total XP", value: xp.toLocaleString(), color: "from-amber-500 to-orange-500" },
             { icon: BookOpen, label: "Lessons Done", value: completedLessons, color: "from-green-500 to-emerald-500" },
             { icon: Flame, label: "Best Streak", value: `${studyStreak} days`, color: "from-red-500 to-rose-500" },
-            { icon: Clock, label: "Hours Studied", value: user?.total_hours || 0, color: "from-blue-500 to-cyan-500" },
-            { icon: Target, label: "Completion", value: `${Math.round((completedLessons / Math.max(totalLessons, 1)) * 100)}%`, color: "from-blue-500 to-blue-600" },
+            { icon: Clock, label: "Hours Studied", value: user?.total_hours || 0, color: "from-cyan-500 to-teal-500" },
+            { icon: Target, label: "Completion", value: `${Math.round((completedLessons / Math.max(totalLessons, 1)) * 100)}%`, color: "bg-primary" },
             { icon: GraduationCap, label: "Projects Done", value: completedProjects, color: "from-pink-500 to-rose-500" },
             { icon: Award, label: "Avg Quiz Score", value: progress?.quiz_scores ? `${Math.round(Object.values(progress.quiz_scores).reduce((a, b) => a + b, 0) / Math.max(Object.keys(progress.quiz_scores).length, 1))}%` : "0%", color: "from-teal-500 to-green-500" },
           ].map((s, i) => (
@@ -176,7 +176,7 @@ export default function StatisticsPage() {
         <Card className="mt-6">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-blue-400" />
+              <Calendar className="h-5 w-5 text-primary" />
               Learning Activity
             </CardTitle>
           </CardHeader>

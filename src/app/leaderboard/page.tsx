@@ -57,7 +57,7 @@ export default function LeaderboardPage() {
           <TabsContent value={period}>
             {loading ? (
               <div className="flex items-center justify-center py-20">
-                <Loader2 className="h-8 w-8 animate-spin text-blue-400" />
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
               </div>
             ) : data.length === 0 ? (
               <div className="text-center py-20 text-muted-foreground">
@@ -80,14 +80,14 @@ export default function LeaderboardPage() {
                           pos === 0 ? "text-amber-400" : pos === 1 ? "text-gray-300" : "text-amber-700"
                         }`} />
                         <Avatar className="h-14 w-14 mb-2 ring-2 ring-blue-600/30">
-                          <AvatarFallback className="bg-gradient-to-br from-blue-700 to-blue-400 text-white">
+                          <AvatarFallback className="bg-primary text-white">
                             {initials(user.name)}
                           </AvatarFallback>
                         </Avatar>
                         <p className="font-semibold text-sm">{user.name}</p>
                         <p className="text-xs text-muted-foreground">{user.xp.toLocaleString()} XP</p>
                         <div className={`w-16 ${heights[pos]} rounded-t-xl bg-gradient-to-t ${
-                          rankColors[pos] || "from-blue-700 to-blue-400"
+                          rankColors[pos] || "bg-primary"
                         } mt-2 opacity-80`} />
                       </div>
                     )
@@ -119,7 +119,7 @@ export default function LeaderboardPage() {
                           </div>
 
                           <Avatar className="h-10 w-10">
-                            <AvatarFallback className="bg-gradient-to-br from-blue-700 to-blue-400 text-white text-xs">
+                            <AvatarFallback className="bg-primary text-white text-xs">
                               {initials(user.name)}
                             </AvatarFallback>
                           </Avatar>

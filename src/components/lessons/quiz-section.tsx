@@ -57,7 +57,7 @@ export function QuizSection({ questions }: QuizSectionProps) {
     return (
       <Card>
         <CardContent className="p-8 text-center">
-          <div className="h-16 w-16 rounded-full bg-gradient-to-br from-blue-700 to-blue-400 flex items-center justify-center mx-auto mb-4">
+          <div className="h-16 w-16 rounded-full bg-primary flex items-center justify-center mx-auto mb-4">
             <Brain className="h-8 w-8 text-white" />
           </div>
           <h3 className="text-2xl font-bold mb-2">Quiz Complete!</h3>
@@ -90,7 +90,7 @@ export function QuizSection({ questions }: QuizSectionProps) {
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg flex items-center gap-2">
-            <Brain className="h-5 w-5 text-blue-400" />
+            <Brain className="h-5 w-5 text-primary" />
             Quick Quiz
           </CardTitle>
           <Badge variant="secondary">
@@ -131,8 +131,8 @@ export function QuizSection({ questions }: QuizSectionProps) {
                         : showResult && isSelected && !isCorrectOption
                         ? "border-red-500 bg-red-500/10"
                         : isSelected
-                        ? "border-blue-600 bg-blue-600/10"
-                        : "border-border hover:border-blue-600/30 hover:bg-accent/50"
+                        ? "border-primary bg-primary/10"
+                        : "border-border hover:border-primary/30 hover:bg-accent/50"
                     }`}
                   >
                     <span className="text-sm">{option}</span>

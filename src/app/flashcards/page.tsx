@@ -77,7 +77,7 @@ export default function FlashcardsPage() {
     return (
       <div className="max-w-2xl mx-auto text-center py-20">
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
-          <Brain className="h-16 w-16 mx-auto mb-4 text-blue-400" />
+          <Brain className="h-16 w-16 mx-auto mb-4 text-primary" />
           <h2 className="text-2xl font-bold mb-2">Session Complete!</h2>
           <p className="text-muted-foreground mb-6">
             Known: {knownCards.size} · Need Review: {unknownCards.size}
@@ -116,7 +116,7 @@ export default function FlashcardsPage() {
           >
             <div
               onClick={() => setFlipped(!flipped)}
-              className="cursor-pointer min-h-[300px] rounded-2xl bg-gradient-to-br from-blue-700/10 via-blue-400/5 to-blue-700/10 border border-blue-600/20 p-8 md:p-12 flex items-center justify-center text-center hover:from-blue-700/20 hover:to-blue-400/20 transition-all duration-300"
+              className="cursor-pointer min-h-[300px] rounded-2xl bg-primary/5 border border-primary/20 p-8 md:p-12 flex items-center justify-center text-center hover:bg-primary/10 transition-all duration-300"
             >
               <div>
                 <p className="text-xs text-muted-foreground mb-3 uppercase tracking-wider">
@@ -170,7 +170,7 @@ export default function FlashcardsPage() {
             <XCircle className="h-3 w-3 text-red-400" /> Review: {unknownCards.size}
           </span>
           <span className="flex items-center gap-1">
-            <Brain className="h-3 w-3 text-blue-400" /> Remaining: {cards.length - currentIndex}
+            <Brain className="h-3 w-3 text-primary" /> Remaining: {cards.length - currentIndex}
           </span>
         </div>
       </motion.div>

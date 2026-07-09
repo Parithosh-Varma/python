@@ -15,7 +15,7 @@ export default function AuthPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <img src="/logo.png" alt="" className="h-14 w-14 animate-pulse rounded-2xl" />
+        <img src="/logo.svg" alt="" className="h-14 w-14 animate-pulse rounded-2xl" />
       </div>
     }>
       <AuthContent />
@@ -91,15 +91,15 @@ function AuthContent() {
   return (
     <div className="min-h-screen bg-background flex">
       {/* Left — branding */}
-      <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 items-center justify-center p-12 relative overflow-hidden">
+      <div className="hidden lg:flex w-1/2 items-center justify-center p-12 relative overflow-hidden" style={{ background: 'linear-gradient(160deg, #173626 0%, #0F2A1D 100%)' }}>
         <div className="absolute inset-0 bg-grid opacity-20" />
         <div className="relative text-center">
-          <img src="/logo.png" alt="" className="h-20 w-20 mx-auto mb-6 rounded-2xl shadow-2xl" />
+          <img src="/logo.svg" alt="" className="h-20 w-20 mx-auto mb-6 rounded-2xl shadow-2xl" />
           <h1 className="text-4xl font-bold text-white mb-3">PyMaster</h1>
-          <p className="text-blue-200/80 text-lg max-w-sm mx-auto leading-relaxed">
+          <p className="text-white/80 text-lg max-w-sm mx-auto leading-relaxed">
             The best free platform to learn Python. From zero to expert, completely free.
           </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-blue-200/60">
+          <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-white/60">
             <span>300+ Lessons</span>
             <span>200+ Projects</span>
             <span>AI Tutor</span>
@@ -116,7 +116,7 @@ function AuthContent() {
           className="w-full max-w-sm"
         >
           <div className="lg:hidden text-center mb-8">
-            <img src="/logo.png" alt="" className="h-14 w-14 mx-auto mb-4 rounded-2xl" />
+            <img src="/logo.svg" alt="" className="h-14 w-14 mx-auto mb-4 rounded-2xl" />
             <h1 className="text-2xl font-bold">PyMaster</h1>
           </div>
 
@@ -142,13 +142,10 @@ function AuthContent() {
             Continue with Google
           </Button>
 
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">Or with email</span>
-            </div>
+          <div className="flex items-center gap-3 text-xs uppercase text-muted-foreground mb-6">
+            <div className="flex-1 border-t" />
+            <span className="shrink-0">Or with email</span>
+            <div className="flex-1 border-t" />
           </div>
 
           <form onSubmit={handleEmailAuth} className="space-y-4">
@@ -206,7 +203,7 @@ function AuthContent() {
               </div>
             </div>
 
-            <Button type="submit" className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white" disabled={loading}>
+            <Button type="submit" className="w-full h-11 bg-[#173626] hover:bg-[#173626]/90 text-[#F4F1E8]" disabled={loading}>
               {loading ? (
                 <><Loader2 className="h-4 w-4 mr-2 animate-spin" /> Please wait...</>
               ) : (
@@ -219,7 +216,7 @@ function AuthContent() {
             {isLogin ? "Don't have an account? " : "Already have an account? "}
             <button
               onClick={() => setIsLogin(!isLogin)}
-              className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+              className="text-primary hover:text-white/90 font-medium transition-colors"
             >
               {isLogin ? "Sign up" : "Sign in"}
             </button>

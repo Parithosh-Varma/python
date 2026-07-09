@@ -48,7 +48,7 @@ export default function RoadmapPage() {
 
         <div className="relative">
           {/* Connecting line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-600 via-blue-400 to-blue-600 hidden md:block" />
+          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/60 via-primary/40 to-primary/60 hidden md:block" />
 
           <div className="space-y-6">
             {categoryOrder.map((cat) => {
@@ -67,15 +67,14 @@ export default function RoadmapPage() {
                       cat === "beginner" ? "bg-emerald-500/20" :
                       cat === "intermediate" ? "bg-amber-500/20" :
                       cat === "advanced" ? "bg-rose-500/20" :
-                      cat === "software-engineering" ? "bg-blue-500/20" :
-                      "bg-blue-600/20"
+                      "bg-primary/20"
                     }`}>
                       <Route className={`h-5 w-5 ${
                         cat === "beginner" ? "text-emerald-400" :
                         cat === "intermediate" ? "text-amber-400" :
                         cat === "advanced" ? "text-rose-400" :
-                        cat === "software-engineering" ? "text-blue-400" :
-                        "text-blue-400"
+                        cat === "software-engineering" ? "text-primary" :
+                        "text-primary"
                       }`} />
                     </div>
                     <div>
@@ -105,7 +104,7 @@ export default function RoadmapPage() {
                               className={`group transition-all duration-300 cursor-pointer ${
                                 status === "locked" ? "opacity-50 hover:opacity-60" :
                                 status === "completed" ? "border-green-500/30" :
-                                "hover:border-blue-600/30"
+                                "hover:border-primary/30"
                               }`}
                               onClick={(e) => {
                                 if (status === "locked") e.preventDefault()
@@ -115,18 +114,18 @@ export default function RoadmapPage() {
                                 <div className="flex items-center gap-4">
                                   <div className={`h-10 w-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
                                     status === "completed" ? "bg-green-500/20" :
-                                    status === "in-progress" ? "bg-blue-500/20" :
+                                    status === "in-progress" ? "bg-primary/20" :
                                     status === "locked" ? "bg-muted" :
-                                    "bg-blue-600/20"
+                                    "bg-primary/20"
                                   }`}>
                                     {status === "completed" ? (
                                       <CheckCircle2 className="h-5 w-5 text-green-400" />
                                     ) : status === "in-progress" ? (
-                                      <PlayCircle className="h-5 w-5 text-blue-400" />
+                                      <PlayCircle className="h-5 w-5 text-primary" />
                                     ) : status === "locked" ? (
                                       <Lock className="h-5 w-5 text-muted-foreground" />
                                     ) : (
-                                      <BookOpen className="h-5 w-5 text-blue-400" />
+                                      <BookOpen className="h-5 w-5 text-primary" />
                                     )}
                                   </div>
                                   <div className="flex-1 min-w-0">
@@ -147,7 +146,7 @@ export default function RoadmapPage() {
                                     <Progress value={progress} className="h-1.5" />
                                   </div>
                                   {status !== "locked" && (
-                                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
+                                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                                   )}
                                 </div>
                               </CardContent>

@@ -77,7 +77,7 @@ export function Onboarding() {
               <div
                 key={i}
                 className={`h-1.5 flex-1 rounded-full transition-colors ${
-                  i <= step ? "bg-blue-500" : "bg-border"
+                  i <= step ? "bg-primary" : "bg-border"
                 }`}
               />
             ))}
@@ -85,7 +85,7 @@ export function Onboarding() {
 
           {/* Content */}
           <div className="flex flex-col items-center text-center mb-8">
-            <div className="h-20 w-20 rounded-2xl bg-gradient-to-br from-blue-700 to-blue-400 flex items-center justify-center mb-6">
+            <div className="h-20 w-20 rounded-2xl bg-primary flex items-center justify-center mb-6">
               <Icon className="h-10 w-10 text-white" />
             </div>
             <h2 className="text-2xl font-bold mb-3">{current.title}</h2>
@@ -109,7 +109,7 @@ export function Onboarding() {
               </Button>
               <Button
                 size="sm"
-                className="bg-blue-600 hover:bg-blue-700 text-white"
+                className="bg-primary hover:bg-primary/80 text-white"
                 onClick={() => {
                   if (isLast) {
                     dismissOnboarding()

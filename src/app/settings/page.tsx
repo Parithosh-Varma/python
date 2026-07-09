@@ -84,7 +84,7 @@ export default function SettingsPage() {
                 <div className="flex items-center gap-6 mb-6">
                   <Avatar className="h-20 w-20">
                     <AvatarImage src={user?.avatar_url} />
-                    <AvatarFallback className="bg-gradient-to-br from-blue-700 to-blue-400 text-white text-2xl">
+                    <AvatarFallback className="bg-primary text-white text-2xl">
                       {user?.name?.split(" ").map(n => n[0]).join("") || "U"}
                     </AvatarFallback>
                   </Avatar>
@@ -139,17 +139,17 @@ export default function SettingsPage() {
                   <button
                     onClick={() => { if (theme !== "dark") toggleTheme() }}
                     className={`p-6 rounded-2xl border-2 text-center transition-all ${
-                      theme === "dark" ? "border-blue-600 bg-blue-600/10" : "border-border hover:border-blue-600/30"
+                      theme === "dark" ? "border-primary bg-primary/10" : "border-border hover:border-primary/30"
                     }`}
                   >
-                    <Moon className="h-8 w-8 mx-auto mb-2 text-blue-400" />
+                    <Moon className="h-8 w-8 mx-auto mb-2 text-primary" />
                     <p className="font-medium">Dark Mode</p>
                     <p className="text-xs text-muted-foreground mt-1">Easy on the eyes</p>
                   </button>
                   <button
                     onClick={() => { if (theme !== "light") toggleTheme() }}
                     className={`p-6 rounded-2xl border-2 text-center transition-all ${
-                      theme === "light" ? "border-blue-600 bg-blue-600/10" : "border-border hover:border-blue-600/30"
+                      theme === "light" ? "border-primary bg-primary/10" : "border-border hover:border-primary/30"
                     }`}
                   >
                     <Sun className="h-8 w-8 mx-auto mb-2 text-amber-400" />

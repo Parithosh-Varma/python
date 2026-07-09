@@ -16,10 +16,10 @@ export function DailyGoal() {
       <CardContent>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <Target className="h-5 w-5 text-blue-400" />
+            <Target className="h-5 w-5 text-primary" />
             <span className="text-sm font-medium">Complete 2 lessons</span>
           </div>
-          <span className="text-sm font-bold text-blue-400">{progress}%</span>
+          <span className="text-sm font-bold text-primary">{progress}%</span>
         </div>
         <Progress value={progress} className="h-2" />
         <div className="flex items-center justify-between mt-4 text-sm text-muted-foreground">

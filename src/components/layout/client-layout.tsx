@@ -33,7 +33,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
     return (
       <div className={cn("min-h-screen bg-background flex items-center justify-center", theme)}>
         <div className="text-center">
-          <img src="/logo.png" alt="" className="h-14 w-14 mx-auto mb-4 rounded-2xl animate-pulse" />
+          <img src="/logo.svg" alt="" className="h-14 w-14 mx-auto mb-4 rounded-2xl animate-pulse" />
           <p className="text-muted-foreground">Redirecting to login...</p>
         </div>
       </div>

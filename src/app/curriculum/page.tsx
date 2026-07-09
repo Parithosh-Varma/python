@@ -135,27 +135,27 @@ export default function CurriculumPage() {
                       transition={{ delay: i * 0.03 }}
                     >
                       <Link href={`/lessons/${topic.lessons[0]}`}>
-                        <Card className="group hover:border-blue-600/30 transition-all duration-300 cursor-pointer">
+                        <Card className="group hover:border-primary/30 transition-all duration-300 cursor-pointer">
                           <CardContent className="p-6">
                             <div className="flex items-start gap-4">
                               <div className={`h-12 w-12 rounded-xl bg-gradient-to-br ${
                                 topic.category === "beginner" ? "from-emerald-500/20 to-green-500/20" :
                                 topic.category === "intermediate" ? "from-amber-500/20 to-yellow-500/20" :
                                 topic.category === "advanced" ? "from-rose-500/20 to-pink-500/20" :
-                                topic.category === "software-engineering" ? "from-blue-500/20 to-cyan-500/20" :
-                                "from-blue-600/20 to-blue-500/20"
+                                topic.category === "software-engineering" ? "from-cyan-500/20 to-teal-500/20" :
+                                "bg-primary/20"
                               } flex items-center justify-center group-hover:scale-110 transition-transform`}>
                                 <Icon className={`h-6 w-6 ${
                                   topic.category === "beginner" ? "text-emerald-400" :
                                   topic.category === "intermediate" ? "text-amber-400" :
                                   topic.category === "advanced" ? "text-rose-400" :
-                                  topic.category === "software-engineering" ? "text-blue-400" :
-                                  "text-blue-400"
+                                  topic.category === "software-engineering" ? "text-primary" :
+                                  "text-primary"
                                 }`} />
                               </div>
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1">
-                                  <h3 className="text-lg font-semibold group-hover:text-blue-400 transition-colors">
+                                  <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">
                                     {topic.title}
                                   </h3>
                                   <Badge variant={topic.category as any}>
@@ -178,7 +178,7 @@ export default function CurriculumPage() {
                                   <span className="text-xs font-medium text-muted-foreground">{progress}%</span>
                                 </div>
                               </div>
-                              <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-blue-400 group-hover:translate-x-1 transition-all flex-shrink-0 mt-2" />
+                              <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0 mt-2" />
                             </div>
                           </CardContent>
                         </Card>

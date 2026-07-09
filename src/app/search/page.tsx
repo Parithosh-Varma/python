@@ -75,7 +75,7 @@ export default function SearchPage() {
 
               <TabsContent value="all" className="space-y-4">
                 {searchResults.lessons.slice(0, 3).map((l) => (
-                  <SearchResultCard key={l.id} href={`/lessons/${l.id}`} icon={BookOpen} color="from-blue-700 to-blue-400">
+                  <SearchResultCard key={l.id} href={`/lessons/${l.id}`} icon={BookOpen} color="bg-primary">
                     <div>
                       <p className="font-medium">{l.title}</p>
                       <p className="text-sm text-muted-foreground">{l.description}</p>
@@ -109,7 +109,7 @@ export default function SearchPage() {
 
               <TabsContent value="lessons" className="space-y-4">
                 {searchResults.lessons.map((l) => (
-                  <SearchResultCard key={l.id} href={`/lessons/${l.id}`} icon={BookOpen} color="from-blue-700 to-blue-400">
+                  <SearchResultCard key={l.id} href={`/lessons/${l.id}`} icon={BookOpen} color="bg-primary">
                     <div className="flex-1">
                       <p className="font-medium">{l.title}</p>
                       <p className="text-sm text-muted-foreground">{l.description}</p>
@@ -173,14 +173,14 @@ function SearchResultCard({
 }) {
   return (
     <Link href={href}>
-      <Card className="group hover:border-blue-600/30 transition-all cursor-pointer">
+      <Card className="group hover:border-primary/30 transition-all cursor-pointer">
         <CardContent className="p-4">
           <div className="flex items-start gap-4">
             <div className={`h-10 w-10 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center flex-shrink-0 mt-0.5`}>
               <Icon className="h-5 w-5 text-white" />
             </div>
             <div className="flex-1 min-w-0">{children}</div>
-            <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-blue-400 group-hover:translate-x-1 transition-all mt-2 flex-shrink-0" />
+            <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all mt-2 flex-shrink-0" />
           </div>
         </CardContent>
       </Card>

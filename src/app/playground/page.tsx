@@ -241,7 +241,7 @@ export default function PlaygroundPage() {
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-sm flex items-center gap-2">
-                  <FileCode className="h-4 w-4 text-blue-400" />
+                  <FileCode className="h-4 w-4 text-primary" />
                   main.py
                 </CardTitle>
               </div>

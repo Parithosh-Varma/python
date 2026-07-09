@@ -54,8 +54,8 @@ export function Sidebar() {
         >
           <div className="flex h-16 items-center justify-between px-4 border-b">
             <Link href="/" className="flex items-center gap-2">
-              <img src="/logo.png" alt="Logo" className="h-8 w-8 rounded-lg" />
-              <span className="font-bold text-lg bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
+              <img src="/logo.svg" alt="PyMaster" className="h-8 w-8 rounded-lg" />
+              <span className="font-bold text-lg serif">
                 PyMaster
               </span>
             </Link>
@@ -73,14 +73,14 @@ export function Sidebar() {
                     className={cn(
                       "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
                       isActive
-                        ? "bg-gradient-to-r from-blue-700/20 to-blue-400/20 text-blue-400 border border-blue-600/20"
+                        ? "bg-primary/10 text-primary border border-primary/20"
                         : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                     )}
                   >
-                    <item.icon className={cn("h-4 w-4", isActive && "text-blue-400")} />
+                    <item.icon className={cn("h-4 w-4", isActive && "text-primary")} />
                     {item.label}
                     {item.label === "AI Tutor" && (
-                      <span className="ml-auto flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-blue-700 to-blue-400">
+                      <span className="ml-auto flex h-5 w-5 items-center justify-center rounded-full bg-primary">
                         <Zap className="h-3 w-3 text-white" />
                       </span>
                     )}
@@ -94,7 +94,7 @@ export function Sidebar() {
             <div className="flex items-center gap-3 rounded-xl bg-accent/30 p-3">
               <Avatar className="h-9 w-9">
                 <AvatarImage src={user?.avatar_url} />
-                <AvatarFallback className="bg-gradient-to-br from-blue-700 to-blue-400 text-white text-xs">
+                <AvatarFallback className="bg-primary text-primary-foreground text-xs">
                   {user?.name?.split(" ").map(n => n[0]).join("") || "U"}
                 </AvatarFallback>
               </Avatar>

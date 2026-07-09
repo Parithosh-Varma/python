@@ -70,12 +70,12 @@ export default function ProjectsPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  <Card className="group h-full hover:border-blue-600/30 transition-all duration-300 cursor-pointer">
+                  <Card className="group h-full hover:border-primary/30 transition-all duration-300 cursor-pointer">
                     <CardContent className="p-6">
-                      <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-700/20 to-blue-400/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Blocks className="h-6 w-6 text-blue-400" />
+                      <div className="h-12 w-12 rounded-xl bg-gradient-to-br bg-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <Blocks className="h-6 w-6 text-primary" />
                       </div>
-                      <h3 className="font-semibold mb-2 group-hover:text-blue-400 transition-colors">
+                      <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">
                         {project.title}
                       </h3>
                       <p className="text-sm text-muted-foreground mb-4 line-clamp-2">

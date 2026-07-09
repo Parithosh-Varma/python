@@ -33,7 +33,7 @@ const notifications = [
   { id: 1, title: "Level Up!", desc: "You reached level 5!", time: "2m ago", icon: IconCheck, color: "text-amber-400" },
   { id: 2, title: "Streak Saved", desc: "7-day streak maintained", time: "1h ago", icon: IconStreak, color: "text-orange-400" },
   { id: 3, title: "Achievement Unlocked", desc: "Completed 10 lessons", time: "3h ago", icon: IconCheck, color: "text-green-400" },
-  { id: 4, title: "New Lesson Available", desc: "Advanced Decorators", time: "1d ago", icon: IconCurriculum, color: "text-blue-400" },
+  { id: 4, title: "New Lesson Available", desc: "Advanced Decorators", time: "1d ago", icon: IconCurriculum, color: "text-primary" },
 ]
 
 export function NavBar() {
@@ -65,7 +65,7 @@ export function NavBar() {
             <input
               type="text"
               placeholder="Search lessons, projects, notes..."
-              className="h-9 w-80 rounded-xl border bg-accent/30 pl-9 pr-4 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-600/50 transition-all"
+              className="h-9 w-80 rounded-xl border bg-accent/30 pl-9 pr-4 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/50 transition-all"
               onFocus={() => router.push("/search")}
             />
           </div>
@@ -77,9 +77,9 @@ export function NavBar() {
             <span className="text-sm font-medium text-amber-400">{user?.streak || 0}</span>
           </div>
 
-          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600/10 border border-blue-600/20">
-            <Zap className="h-4 w-4 text-blue-400" />
-            <span className="text-sm font-medium text-blue-400">{user?.xp || 0} XP</span>
+          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/10 border border-primary/20">
+            <Zap className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium text-primary">{user?.xp || 0} XP</span>
           </div>
 
           <Button variant="ghost" size="icon" onClick={toggleTheme} className="text-muted-foreground">
@@ -95,7 +95,7 @@ export function NavBar() {
               onClick={() => setShowNotifications(!showNotifications)}
             >
               <IconNotifications className="h-5 w-5" />
-              <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-blue-500" />
+              <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary" />
             </Button>
 
             <AnimatePresence>
@@ -147,7 +147,7 @@ export function NavBar() {
             >
               <Avatar className="h-8 w-8">
                 <AvatarImage src={user?.avatar_url} />
-                <AvatarFallback className="bg-gradient-to-br from-blue-700 to-blue-400 text-white text-xs">
+                <AvatarFallback className="bg-primary text-primary-foreground text-xs">
                   {user?.name?.split(" ").map(n => n[0]).join("") || "U"}
                 </AvatarFallback>
               </Avatar>

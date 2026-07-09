@@ -41,7 +41,7 @@ export const useStore = create<AppState>()(
       notes: [],
       activities: [],
       achievements: [],
-      theme: "dark",
+      theme: "light",
       sidebarOpen: true,
       showOnboarding: true,
 
@@ -194,6 +194,13 @@ export const useStore = create<AppState>()(
     }),
     {
       name: "python-master-academy",
+      version: 2,
+      migrate: (persisted: any, version: number) => {
+        if (version < 2) {
+          persisted.theme = "light"
+        }
+        return persisted as AppState
+      },
       partialize: (state) => ({
         user: state.user,
         progress: state.progress,
