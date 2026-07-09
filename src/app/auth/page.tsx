@@ -33,39 +33,11 @@ export default function AuthPage() {
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-
-    try {
-      // Simulate auth - in production, use Supabase
-      await new Promise((r) => setTimeout(r, 1000))
-
-      const userData = {
-        id: "user_" + Math.random().toString(36).substring(2),
-        email,
-        name: isLogin ? email.split("@")[0] : name,
-        xp: 0,
-        level: 1,
-        streak: 0,
-        longest_streak: 0,
-        total_hours: 0,
-        completed_lessons: 0,
-        completed_projects: 0,
-        created_at: new Date().toISOString(),
-      }
-
-      setUser(userData)
-      toast.success(isLogin ? "Welcome back!" : "Account created!")
-      router.push("/dashboard")
-    } catch (err: any) {
-      toast.error(err.message || "Authentication failed")
-    } finally {
-      setLoading(false)
-    }
-  }
-
   const handleGoogleAuth = async () => {
+    if (!supabase) {
+      toast.error("Supabase not configured. Add env vars.")
+      return
+    }
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: `${window.location.origin}/auth/callback` },
@@ -77,6 +49,21 @@ export default function AuthPage() {
     e.preventDefault()
     setLoading(true)
     try {
+      if (!supabase) {
+        // Demo mode when Supabase not configured
+        await new Promise((r) => setTimeout(r, 1000))
+        setUser({
+          id: "demo_" + Math.random().toString(36).substring(2),
+          email,
+          name: isLogin ? email.split("@")[0] : name,
+          xp: 0, level: 1, streak: 0, longest_streak: 0,
+          total_hours: 0, completed_lessons: 0, completed_projects: 0,
+          created_at: new Date().toISOString(),
+        })
+        toast.success(isLogin ? "Welcome back!" : "Account created!")
+        router.push("/dashboard")
+        return
+      }
       const { data, error } = isLogin
         ? await supabase.auth.signInWithPassword({ email, password })
         : await supabase.auth.signUp({ email, password, options: { data: { name } } })
