@@ -18,6 +18,7 @@ import {
   Flame,
   BarChart3,
   Shield,
+  Settings,
   ChevronLeft,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -37,6 +38,7 @@ const sidebarItems = [
   { icon: Sparkles, label: "AI Tutor", href: "/ai-tutor" },
   { icon: BarChart3, label: "Statistics", href: "/statistics" },
   { icon: Shield, label: "Certificates", href: "/certificates" },
+  { icon: Settings, label: "Settings", href: "/settings" },
 ]
 
 export function Sidebar() {
