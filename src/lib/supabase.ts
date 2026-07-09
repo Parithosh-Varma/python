@@ -7,7 +7,9 @@ function createSupabaseClient() {
   if (!supabaseUrl || !supabaseAnonKey) {
     return null as any
   }
-  return createClient(supabaseUrl, supabaseAnonKey)
+  return createClient(supabaseUrl, supabaseAnonKey, {
+    auth: { flowType: "pkce" },
+  })
 }
 
 export const supabase = createSupabaseClient()
