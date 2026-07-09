@@ -89,7 +89,7 @@ export default function AuthPage() {
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 bg-grid opacity-30" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
 
       <motion.div
@@ -99,7 +99,7 @@ export default function AuthPage() {
       >
         <div className="text-center mb-8">
           <img src="/logo.png" alt="Logo" className="h-14 w-14 mx-auto mb-4 rounded-2xl" />
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
             PyMaster
           </h1>
           <p className="text-muted-foreground mt-2">
@@ -107,7 +107,7 @@ export default function AuthPage() {
           </p>
         </div>
 
-        <Card className="border-purple-500/20 bg-card/60 backdrop-blur-xl">
+        <Card className="border-blue-600/20 bg-card/60 backdrop-blur-xl">
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle>{isLogin ? "Sign In" : "Create Account"}</CardTitle>

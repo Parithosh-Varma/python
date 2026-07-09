@@ -68,7 +68,7 @@ const certificates = [
     title: "Automation Expert",
     description: "Automation & scripting",
     icon: Bot,
-    color: "from-purple-500 to-violet-500",
+    color: "from-blue-600 to-blue-500",
     progress: 0,
     status: "locked",
     criteria: ["Complete automation specialization", "Build 3 automation projects"],
@@ -78,7 +78,7 @@ const certificates = [
     title: "Backend Developer",
     description: "Backend engineering",
     icon: Server,
-    color: "from-indigo-500 to-purple-500",
+    color: "from-blue-500 to-blue-600",
     progress: 0,
     status: "locked",
     criteria: ["Complete web development path", "Build a full-stack application"],
@@ -98,7 +98,7 @@ const certificates = [
     title: "Python Master",
     description: "Ultimate Python mastery",
     icon: Award,
-    color: "from-purple-600 to-pink-500",
+    color: "from-blue-700 to-blue-400",
     progress: 0,
     status: "locked",
     criteria: ["Complete ALL curriculum paths", "Build 20+ projects", "Pass master exam"],
@@ -132,7 +132,7 @@ export default function CertificatesPage() {
                 <Card className={`h-full transition-all duration-300 ${
                   isEarned ? "border-green-500/30" :
                   isLocked ? "opacity-60" :
-                  "hover:border-purple-500/30"
+                  "hover:border-blue-600/30"
                 }`}>
                   <CardContent className="p-6">
                     <div className="relative mb-6">

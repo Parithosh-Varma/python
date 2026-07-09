@@ -60,14 +60,14 @@ export default function QuizPage() {
               transition={{ delay: i * 0.05 }}
             >
               <Card
-                className="group hover:border-purple-500/30 transition-all duration-300 cursor-pointer h-full"
+                className="group hover:border-blue-600/30 transition-all duration-300 cursor-pointer h-full"
                 onClick={() => setSelectedQuiz(quiz.id)}
               >
                 <CardContent className="p-6">
-                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-600/20 to-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Brain className="h-6 w-6 text-purple-400" />
+                  <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-700/20 to-blue-400/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Brain className="h-6 w-6 text-blue-400" />
                   </div>
-                  <h3 className="font-semibold mb-2 group-hover:text-purple-400 transition-colors">{quiz.title}</h3>
+                  <h3 className="font-semibold mb-2 group-hover:text-blue-400 transition-colors">{quiz.title}</h3>
                   <div className="flex flex-wrap gap-2 mb-4">
                     <Badge variant={quiz.difficulty as any}>{quiz.difficulty}</Badge>
                     <Badge variant="secondary">{quiz.questions} questions</Badge>

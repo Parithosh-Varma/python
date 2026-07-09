@@ -84,15 +84,15 @@ export default function LeaderboardPage() {
                     <Icon className={`h-6 w-6 mb-2 ${
                       pos === 0 ? "text-amber-400" : pos === 1 ? "text-gray-300" : "text-amber-700"
                     }`} />
-                    <Avatar className="h-14 w-14 mb-2 ring-2 ring-purple-500/30">
-                      <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-500 text-white">
+                    <Avatar className="h-14 w-14 mb-2 ring-2 ring-blue-600/30">
+                      <AvatarFallback className="bg-gradient-to-br from-blue-700 to-blue-400 text-white">
                         {user.avatar}
                       </AvatarFallback>
                     </Avatar>
                     <p className="font-semibold text-sm">{user.name}</p>
                     <p className="text-xs text-muted-foreground">{user.xp.toLocaleString()} XP</p>
                     <div className={`w-16 ${heights[pos]} rounded-t-xl bg-gradient-to-t ${
-                      rankColors[pos] || "from-purple-600 to-blue-500"
+                      rankColors[pos] || "from-blue-700 to-blue-400"
                     } mt-2 opacity-80`} />
                   </div>
                 )
@@ -124,7 +124,7 @@ export default function LeaderboardPage() {
                       </div>
 
                       <Avatar className="h-10 w-10">
-                        <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-500 text-white text-xs">
+                        <AvatarFallback className="bg-gradient-to-br from-blue-700 to-blue-400 text-white text-xs">
                           {user.avatar}
                         </AvatarFallback>
                       </Avatar>

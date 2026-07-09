@@ -50,10 +50,10 @@ const features = [
 const specializations = [
   { icon: Globe, title: "Web Dev", desc: "Django, Flask, FastAPI", color: "from-blue-500 to-cyan-500" },
   { icon: BarChart, title: "Data Science", desc: "NumPy, Pandas, ML", color: "from-green-500 to-emerald-500" },
-  { icon: Cpu, title: "AI & ML", desc: "TensorFlow, PyTorch", color: "from-purple-500 to-pink-500" },
+  { icon: Cpu, title: "AI & ML", desc: "TensorFlow, PyTorch", color: "from-blue-600 to-blue-400" },
   { icon: Gamepad2, title: "Game Dev", desc: "Pygame, Arcade", color: "from-orange-500 to-red-500" },
   { icon: Shield, title: "Cybersecurity", desc: "Security tools", color: "from-red-500 to-rose-500" },
-  { icon: Bot, title: "Automation", desc: "Scripts, scraping", color: "from-indigo-500 to-purple-500" },
+  { icon: Bot, title: "Automation", desc: "Scripts, scraping", color: "from-blue-500 to-blue-600" },
 ]
 
 export default function LandingPage() {
@@ -64,7 +64,7 @@ export default function LandingPage() {
         <div className="container mx-auto flex h-16 items-center justify-between px-6">
           <div className="flex items-center gap-2">
             <img src="/logo.png" alt="Logo" className="h-8 w-8 rounded-lg" />
-            <span className="font-bold text-xl bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="font-bold text-xl bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
               PyMaster
             </span>
           </div>
@@ -84,7 +84,7 @@ export default function LandingPage() {
       {/* Hero */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-grid opacity-50" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
         <div className="container mx-auto px-6 relative">
           <motion.div
@@ -103,7 +103,7 @@ export default function LandingPage() {
               className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
             >
               Master Python from{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
                 Zero to Expert
               </span>
             </motion.h1>
@@ -148,7 +148,7 @@ export default function LandingPage() {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Everything You Need to{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
                 Master Python
               </span>
             </h2>
@@ -166,10 +166,10 @@ export default function LandingPage() {
                 viewport={{ once: true }}
                 custom={i}
                 variants={fadeUp}
-                className="group rounded-2xl border bg-card/30 backdrop-blur-sm p-6 hover:border-purple-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/5"
+                className="group rounded-2xl border bg-card/30 backdrop-blur-sm p-6 hover:border-blue-600/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-600/5"
               >
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-600/20 to-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <f.icon className="h-6 w-6 text-purple-400" />
+                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-700/20 to-blue-400/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <f.icon className="h-6 w-6 text-blue-400" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{f.title}</h3>
                 <p className="text-sm text-muted-foreground">{f.desc}</p>
@@ -185,7 +185,7 @@ export default function LandingPage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Explore{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
                 Specializations
               </span>
             </h2>
@@ -234,8 +234,8 @@ export default function LandingPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <s.icon className="h-8 w-8 mx-auto mb-3 text-purple-400" />
-                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                <s.icon className="h-8 w-8 mx-auto mb-3 text-blue-400" />
+                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
                   {s.num}
                 </div>
                 <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
@@ -248,13 +248,13 @@ export default function LandingPage() {
       {/* CTA */}
       <section className="py-20 border-t">
         <div className="container mx-auto px-6">
-          <div className="relative rounded-3xl bg-gradient-to-br from-purple-600/20 via-blue-600/10 to-purple-600/20 border border-purple-500/20 p-12 md:p-20 text-center overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl" />
+          <div className="relative rounded-3xl bg-gradient-to-br from-blue-700/20 via-blue-500/10 to-blue-700/20 border border-blue-600/20 p-12 md:p-20 text-center overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl" />
             <div className="relative">
               <h2 className="text-3xl md:text-5xl font-bold mb-6">
                 Ready to Become a{" "}
-                <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent">
                   Python Expert
                 </span>
                 ?
@@ -276,7 +276,7 @@ export default function LandingPage() {
       <footer className="border-t py-8">
         <div className="container mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="h-6 w-6 rounded-md bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
+            <div className="h-6 w-6 rounded-md bg-gradient-to-br from-blue-700 to-blue-400 flex items-center justify-center">
               <span className="text-white font-bold text-xs">P</span>
             </div>
             <span className="font-semibold">PyMaster</span>

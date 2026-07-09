@@ -180,7 +180,7 @@ Would you like me to elaborate on any specific part?`,
         <Card>
           <CardHeader className="pb-3 border-b">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-700 to-blue-400 flex items-center justify-center">
                 <Bot className="h-5 w-5 text-white" />
               </div>
               <div>
@@ -200,7 +200,7 @@ Would you like me to elaborate on any specific part?`,
                 >
                   <Avatar className={`h-8 w-8 flex-shrink-0 ${msg.role === "assistant" ? "" : ""}`}>
                     {msg.role === "assistant" ? (
-                      <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-500 text-white">
+                      <AvatarFallback className="bg-gradient-to-br from-blue-700 to-blue-400 text-white">
                         <Bot className="h-4 w-4" />
                       </AvatarFallback>
                     ) : (
@@ -213,7 +213,7 @@ Would you like me to elaborate on any specific part?`,
                     className={`max-w-[80%] rounded-2xl p-4 ${
                       msg.role === "assistant"
                         ? "bg-accent/50 border"
-                        : "bg-gradient-to-r from-purple-600 to-blue-500 text-white"
+                        : "bg-gradient-to-r from-blue-700 to-blue-400 text-white"
                     }`}
                   >
                     <div className="text-sm whitespace-pre-wrap leading-relaxed">
@@ -235,15 +235,15 @@ Would you like me to elaborate on any specific part?`,
               {isTyping && (
                 <div className="flex gap-3">
                   <Avatar className="h-8 w-8">
-                    <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-500 text-white">
+                    <AvatarFallback className="bg-gradient-to-br from-blue-700 to-blue-400 text-white">
                       <Bot className="h-4 w-4" />
                     </AvatarFallback>
                   </Avatar>
                   <div className="rounded-2xl p-4 bg-accent/50 border">
                     <div className="flex gap-1">
-                      <span className="h-2 w-2 rounded-full bg-purple-400 animate-bounce" style={{ animationDelay: "0ms" }} />
-                      <span className="h-2 w-2 rounded-full bg-purple-400 animate-bounce" style={{ animationDelay: "150ms" }} />
-                      <span className="h-2 w-2 rounded-full bg-purple-400 animate-bounce" style={{ animationDelay: "300ms" }} />
+                      <span className="h-2 w-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: "0ms" }} />
+                      <span className="h-2 w-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: "150ms" }} />
+                      <span className="h-2 w-2 rounded-full bg-blue-400 animate-bounce" style={{ animationDelay: "300ms" }} />
                     </div>
                   </div>
                 </div>

@@ -65,7 +65,7 @@ export function NavBar() {
             <input
               type="text"
               placeholder="Search lessons, projects, notes..."
-              className="h-9 w-80 rounded-xl border bg-accent/30 pl-9 pr-4 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
+              className="h-9 w-80 rounded-xl border bg-accent/30 pl-9 pr-4 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-600/50 transition-all"
               onFocus={() => router.push("/search")}
             />
           </div>
@@ -77,9 +77,9 @@ export function NavBar() {
             <span className="text-sm font-medium text-amber-400">{user?.streak || 0}</span>
           </div>
 
-          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-500/10 border border-purple-500/20">
-            <Zap className="h-4 w-4 text-purple-400" />
-            <span className="text-sm font-medium text-purple-400">{user?.xp || 0} XP</span>
+          <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600/10 border border-blue-600/20">
+            <Zap className="h-4 w-4 text-blue-400" />
+            <span className="text-sm font-medium text-blue-400">{user?.xp || 0} XP</span>
           </div>
 
           <Button variant="ghost" size="icon" onClick={toggleTheme} className="text-muted-foreground">
@@ -95,7 +95,7 @@ export function NavBar() {
               onClick={() => setShowNotifications(!showNotifications)}
             >
               <IconNotifications className="h-5 w-5" />
-              <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-purple-500" />
+              <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-blue-500" />
             </Button>
 
             <AnimatePresence>
@@ -147,7 +147,7 @@ export function NavBar() {
             >
               <Avatar className="h-8 w-8">
                 <AvatarImage src={user?.avatar_url} />
-                <AvatarFallback className="bg-gradient-to-br from-purple-600 to-blue-500 text-white text-xs">
+                <AvatarFallback className="bg-gradient-to-br from-blue-700 to-blue-400 text-white text-xs">
                   {user?.name?.split(" ").map(n => n[0]).join("") || "U"}
                 </AvatarFallback>
               </Avatar>

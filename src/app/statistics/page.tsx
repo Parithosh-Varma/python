@@ -61,12 +61,12 @@ export default function StatisticsPage() {
         {/* Stats Overview */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
-            { icon: TrendingUp, label: "Current Level", value: level, color: "from-purple-600 to-blue-500" },
+            { icon: TrendingUp, label: "Current Level", value: level, color: "from-blue-700 to-blue-400" },
             { icon: Zap, label: "Total XP", value: xp.toLocaleString(), color: "from-amber-500 to-orange-500" },
             { icon: BookOpen, label: "Lessons Done", value: completedLessons, color: "from-green-500 to-emerald-500" },
             { icon: Flame, label: "Best Streak", value: `${studyStreak} days`, color: "from-red-500 to-rose-500" },
             { icon: Clock, label: "Hours Studied", value: user?.total_hours || 0, color: "from-blue-500 to-cyan-500" },
-            { icon: Target, label: "Completion", value: `${Math.round((completedLessons / totalLessons) * 100)}%`, color: "from-violet-500 to-purple-500" },
+            { icon: Target, label: "Completion", value: `${Math.round((completedLessons / totalLessons) * 100)}%`, color: "from-blue-500 to-blue-600" },
             { icon: GraduationCap, label: "Projects Done", value: completedProjects, color: "from-pink-500 to-rose-500" },
             { icon: Award, label: "Avg Quiz Score", value: "85%", color: "from-teal-500 to-green-500" },
           ].map((s, i) => (
@@ -167,7 +167,7 @@ export default function StatisticsPage() {
         <Card className="mt-6">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-purple-400" />
+              <Calendar className="h-5 w-5 text-blue-400" />
               Learning Heatmap
             </CardTitle>
           </CardHeader>

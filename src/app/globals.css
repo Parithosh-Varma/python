@@ -26,25 +26,47 @@
 }
 
 :root {
-  --background: hsl(240 10% 3.9%);
-  --foreground: hsl(0 0% 98%);
-  --card: hsl(240 10% 5.9%);
-  --card-foreground: hsl(0 0% 98%);
-  --popover: hsl(240 10% 5.9%);
-  --popover-foreground: hsl(0 0% 98%);
-  --primary: hsl(263 70% 50%);
-  --primary-foreground: hsl(0 0% 98%);
-  --secondary: hsl(240 3.7% 15.9%);
-  --secondary-foreground: hsl(0 0% 98%);
-  --muted: hsl(240 3.7% 15.9%);
-  --muted-foreground: hsl(240 5% 64.9%);
-  --accent: hsl(240 3.7% 15.9%);
-  --accent-foreground: hsl(0 0% 98%);
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(0 0% 98%);
-  --border: hsl(240 3.7% 15.9%);
-  --input: hsl(240 3.7% 15.9%);
-  --ring: hsl(263 70% 50%);
+  --background: hsl(222 47% 6%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(222 47% 8%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(222 47% 8%);
+  --popover-foreground: hsl(210 40% 98%);
+  --primary: hsl(221 95% 17%);
+  --primary-foreground: hsl(210 40% 98%);
+  --secondary: hsl(217 33% 17%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(217 33% 17%);
+  --muted-foreground: hsl(215 20% 65%);
+  --accent: hsl(217 33% 17%);
+  --accent-foreground: hsl(210 40% 98%);
+  --destructive: hsl(0 63% 31%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(217 33% 17%);
+  --input: hsl(217 33% 17%);
+  --ring: hsl(221 83% 53%);
+}
+
+.light {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(222 47% 11%);
+  --card: hsl(210 40% 98%);
+  --card-foreground: hsl(222 47% 11%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(222 47% 11%);
+  --primary: hsl(221 83% 53%);
+  --primary-foreground: hsl(210 40% 98%);
+  --secondary: hsl(210 40% 96%);
+  --secondary-foreground: hsl(222 47% 11%);
+  --muted: hsl(210 40% 96%);
+  --muted-foreground: hsl(215 16% 47%);
+  --accent: hsl(210 40% 96%);
+  --accent-foreground: hsl(222 47% 11%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(214 32% 91%);
+  --input: hsl(214 32% 91%);
+  --ring: hsl(221 83% 53%);
 }
 
 .light {
@@ -91,7 +113,7 @@
     border: 1px solid rgba(0, 0, 0, 0.06);
   }
   .text-gradient {
-    background: linear-gradient(135deg, #a855f7, #3b82f6);
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

@@ -89,7 +89,7 @@ export default function NotesPage() {
         </div>
 
         {showEditor && (
-          <Card className="mb-8 border-purple-500/30">
+          <Card className="mb-8 border-blue-600/30">
             <CardContent className="p-6">
               <Input
                 placeholder="Note title..."
@@ -135,7 +135,7 @@ export default function NotesPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.03 }}
               >
-                <Card className="group h-full hover:border-purple-500/30 transition-all">
+                <Card className="group h-full hover:border-blue-600/30 transition-all">
                   <CardContent className="p-5">
                     {editingId === note.id ? (
                       <div>
@@ -156,7 +156,7 @@ export default function NotesPage() {
                       </div>
                     ) : (
                       <div onClick={() => setEditingId(note.id)} className="cursor-pointer">
-                        <h3 className="font-semibold mb-2 group-hover:text-purple-400 transition-colors">{note.title}</h3>
+                        <h3 className="font-semibold mb-2 group-hover:text-blue-400 transition-colors">{note.title}</h3>
                         <p className="text-sm text-muted-foreground line-clamp-4 mb-3">{note.content}</p>
                         <div className="flex flex-wrap gap-1.5 mb-3">
                           {note.tags.map((tag) => (

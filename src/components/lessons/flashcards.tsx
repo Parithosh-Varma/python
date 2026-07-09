@@ -62,7 +62,7 @@ export function Flashcards({ cards }: FlashcardsProps) {
           >
             <div
               onClick={() => setFlipped(!flipped)}
-              className="relative cursor-pointer min-h-[160px] rounded-xl bg-gradient-to-br from-purple-600/10 to-blue-500/10 border border-purple-500/20 p-6 flex items-center justify-center text-center hover:from-purple-600/20 hover:to-blue-500/20 transition-all"
+              className="relative cursor-pointer min-h-[160px] rounded-xl bg-gradient-to-br from-blue-700/10 to-blue-400/10 border border-blue-600/20 p-6 flex items-center justify-center text-center hover:from-blue-700/20 hover:to-blue-400/20 transition-all"
             >
               <div>
                 <p className="text-xs text-muted-foreground mb-2">

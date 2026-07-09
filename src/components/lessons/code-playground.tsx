@@ -50,7 +50,7 @@ export function CodePlayground({ starterCode = "# Write your code here\n", solut
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm flex items-center gap-2">
-            <Terminal className="h-4 w-4 text-purple-400" />
+            <Terminal className="h-4 w-4 text-blue-400" />
             Code Playground
           </CardTitle>
           <div className="flex items-center gap-2">

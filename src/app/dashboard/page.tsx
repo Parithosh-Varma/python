@@ -77,7 +77,7 @@ export default function DashboardPage() {
             title="Current Level"
             value={level}
             icon={TrendingUp}
-            gradient="from-purple-600 to-blue-500"
+            gradient="from-blue-700 to-blue-400"
             subtitle={`${currentLevelXp} / ${nextLevelXp} XP to next level`}
             delay={0.1}
           />
@@ -125,7 +125,7 @@ export default function DashboardPage() {
             title="Overall Progress"
             value={`${overallProgress}%`}
             icon={Target}
-            gradient="from-violet-500 to-purple-500"
+            gradient="from-blue-500 to-blue-600"
             subtitle={`${completedLessons} / ${totalLessons} lessons`}
             delay={0.4}
           />
@@ -156,7 +156,7 @@ export default function DashboardPage() {
           <Card className="lg:col-span-2">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <Layers className="h-5 w-5 text-purple-400" />
+                <Layers className="h-5 w-5 text-blue-400" />
                 Current Learning Path
               </CardTitle>
             </CardHeader>
@@ -172,8 +172,8 @@ export default function DashboardPage() {
                       transition={{ delay: i * 0.05 }}
                       className="flex items-center gap-4 p-3 rounded-xl hover:bg-accent/30 transition-colors cursor-pointer"
                     >
-                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-purple-600/20 to-blue-500/20 flex items-center justify-center">
-                        <BookOpen className="h-5 w-5 text-purple-400" />
+                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-blue-700/20 to-blue-400/20 flex items-center justify-center">
+                        <BookOpen className="h-5 w-5 text-blue-400" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium">{topic.title}</p>
@@ -214,7 +214,7 @@ export default function DashboardPage() {
                 { name: "Beginner Python", progress: beginnerDone / beginnerTopics * 100, color: "from-emerald-500 to-green-500" },
                 { name: "Intermediate Python", progress: 25, color: "from-amber-500 to-yellow-500" },
                 { name: "Python Developer", progress: 10, color: "from-blue-500 to-cyan-500" },
-                { name: "Python Master", progress: 5, color: "from-purple-500 to-pink-500" },
+                { name: "Python Master", progress: 5, color: "from-blue-600 to-blue-400" },
               ].map((cert) => (
                 <div key={cert.name} className="p-4 rounded-xl border bg-card/30">
                   <div className="flex items-center justify-between mb-3">

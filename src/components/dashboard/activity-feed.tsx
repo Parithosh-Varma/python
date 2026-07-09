@@ -17,7 +17,7 @@ const activityIcons = {
 
 const activityColors = {
   lesson: "from-blue-500 to-cyan-500",
-  project: "from-purple-500 to-pink-500",
+  project: "from-blue-600 to-blue-400",
   quiz: "from-amber-500 to-orange-500",
   achievement: "from-green-500 to-emerald-500",
   streak: "from-red-500 to-rose-500",
