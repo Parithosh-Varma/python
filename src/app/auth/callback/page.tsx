@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 import * as db from "@/lib/supabase-service"
@@ -11,15 +11,29 @@ function CallbackHandler() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { syncFromSupabase } = useStore()
-  const [error, setError] = useState<string | null>(null)
-
   useEffect(() => {
     const code = searchParams.get("code")
     if (!code) {
       const hash = window.location.hash
       if (hash && hash.includes("access_token")) {
-        setError("session_in_hash")
-        return
+        const params = new URLSearchParams(hash.substring(1))
+        const access_token = params.get("access_token")
+        const refresh_token = params.get("refresh_token")
+
+        if (access_token && refresh_token && supabase) {
+          ;(async () => {
+            const { data, error: sessionError } = await supabase.auth.setSession({ access_token, refresh_token })
+            if (sessionError) {
+              router.replace(`/auth?error=session_failed&message=${encodeURIComponent(sessionError.message)}`)
+              return
+            }
+            if (data.user) {
+              await syncFromSupabase(data.user.id)
+            }
+            router.replace("/dashboard")
+          })()
+          return
+        }
       }
       router.replace("/auth?error=no_code")
       return
@@ -50,17 +64,6 @@ function CallbackHandler() {
       }
     })()
   }, [searchParams, router, syncFromSupabase])
-
-  if (error === "session_in_hash") {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center">
-          <img src="/logo.svg" alt="" className="h-14 w-14 mx-auto mb-4 rounded-2xl animate-pulse" />
-          <p className="text-muted-foreground">Detecting session...</p>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
