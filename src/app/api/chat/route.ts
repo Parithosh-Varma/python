@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server"
-import OpenAI from "openai"
+import Groq from "groq-sdk"
 
-const client = process.env.OPENAI_API_KEY
-  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+const client = process.env.GROQ_API_KEY
+  ? new Groq({ apiKey: process.env.GROQ_API_KEY })
   : null
 
 const systemPrompt = `You are PyMaster AI Tutor, an expert Python teacher. You help students learn Python programming.
@@ -21,10 +21,9 @@ export async function POST(req: Request) {
     const { messages } = await req.json()
 
     if (!client) {
-      return NextResponse.json(
-        {
-          role: "assistant",
-          content: `I'm currently in offline mode. To enable the AI tutor with real responses, add your \`OPENAI_API_KEY\` to the environment variables.
+      return NextResponse.json({
+        role: "assistant",
+        content: `I'm currently in offline mode. To enable the AI tutor with real responses, add your \`GROQ_API_KEY\` to the environment variables.
 
 In the meantime, I can help with general Python concepts. What would you like to know?
 
@@ -32,8 +31,7 @@ In the meantime, I can help with general Python concepts. What would you like to
 # Example: Python is great for learning!
 print("Hello, Python learner!")
 \`\`\``,
-        }
-      )
+      })
     }
 
     const chatMessages = [
@@ -45,7 +43,7 @@ print("Hello, Python learner!")
     ]
 
     const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "llama-3.1-8b-instant",
       messages: chatMessages,
       max_tokens: 2048,
       temperature: 0.7,
