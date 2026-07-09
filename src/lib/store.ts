@@ -11,6 +11,8 @@ interface AppState {
   achievements: Achievement[]
   theme: "dark" | "light"
   sidebarOpen: boolean
+  showOnboarding: boolean
+  dismissOnboarding: () => void
   setUser: (user: User | null) => void
   setProgress: (progress: UserProgress | null) => void
   setNotes: (notes: Note[]) => void
@@ -41,6 +43,9 @@ export const useStore = create<AppState>()(
       achievements: [],
       theme: "dark",
       sidebarOpen: true,
+      showOnboarding: true,
+
+      dismissOnboarding: () => set({ showOnboarding: false }),
 
       setUser: (user) => set({ user }),
       setProgress: (progress) => set({ progress }),
@@ -196,6 +201,7 @@ export const useStore = create<AppState>()(
         activities: state.activities,
         achievements: state.achievements,
         theme: state.theme,
+        showOnboarding: state.showOnboarding,
       }),
     }
   )

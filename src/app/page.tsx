@@ -45,7 +45,7 @@ export default function LandingPage() {
             <img src="/logo.png" alt="" className="h-8 w-8 rounded-lg" />
             <span className="text-lg font-semibold tracking-tight">PyMaster</span>
           </Link>
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             <Link href="/curriculum" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Curriculum
             </Link>
@@ -55,14 +55,14 @@ export default function LandingPage() {
             <Link href="/playground" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Playground
             </Link>
-            <Link href="/dashboard">
+            <Link href="/auth?mode=signin">
               <Button variant="ghost" size="sm" className="text-sm">
-                Dashboard
+                Sign In
               </Button>
             </Link>
-            <Link href="/auth">
+            <Link href="/auth?mode=signup">
               <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/25">
-                Start Free <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                Sign Up <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
               </Button>
             </Link>
           </div>
@@ -75,10 +75,10 @@ export default function LandingPage() {
             <Link href="/curriculum" className="block text-sm py-2">Curriculum</Link>
             <Link href="/projects" className="block text-sm py-2">Projects</Link>
             <Link href="/playground" className="block text-sm py-2">Playground</Link>
-            <Link href="/dashboard" className="block text-sm py-2">Dashboard</Link>
-            <Link href="/auth">
+            <Link href="/auth?mode=signin" className="block text-sm py-2">Sign In</Link>
+            <Link href="/auth?mode=signup">
               <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-white mt-2">
-                Start Free <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                Sign Up <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
               </Button>
             </Link>
           </div>
@@ -119,7 +119,7 @@ export default function LandingPage() {
             absolute beginner to professional Python developer.
           </motion.p>
           <motion.div variants={fadeUp} custom={3} className="flex flex-wrap justify-center gap-4">
-            <Link href="/auth">
+            <Link href="/auth?mode=signup">
               <Button size="xl" className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/30 text-base px-8 h-14 rounded-2xl">
                 Start Learning Free <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -560,7 +560,7 @@ export default function LandingPage() {
               custom={3}
               className="flex flex-wrap justify-center gap-4"
             >
-              <Link href="/auth">
+              <Link href="/auth?mode=signup">
                 <Button size="xl" className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/30 text-base px-10 h-14 rounded-2xl">
                   Start Learning Free <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
@@ -587,7 +587,7 @@ export default function LandingPage() {
               <Link href="/curriculum" className="hover:text-foreground transition-colors">Curriculum</Link>
               <Link href="/projects" className="hover:text-foreground transition-colors">Projects</Link>
               <Link href="/playground" className="hover:text-foreground transition-colors">Playground</Link>
-              <Link href="/auth" className="hover:text-foreground transition-colors">Sign In</Link>
+              <Link href="/auth?mode=signin" className="hover:text-foreground transition-colors">Sign In</Link>
             </div>
             <p className="text-xs text-muted-foreground">
               &copy; 2026 PyMaster. Open source.

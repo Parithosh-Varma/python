@@ -9,6 +9,7 @@ import { ProgressChart, XPBarChart } from "@/components/dashboard/progress-chart
 import { ActivityFeed } from "@/components/dashboard/activity-feed"
 import { Achievements } from "@/components/dashboard/achievements"
 import { DailyGoal } from "@/components/dashboard/daily-goal"
+import { Onboarding } from "@/components/onboarding"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
@@ -57,6 +58,7 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-8">
+      <Onboarding />
       {/* Header */}
       <motion.div initial="hidden" animate="visible">
         <motion.div variants={fadeUp} custom={0} className="flex items-center justify-between mb-8">
