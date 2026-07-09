@@ -3,42 +3,39 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import {
-  LayoutDashboard,
-  BookOpen,
-  Route,
-  Code2,
-  Blocks,
-  GraduationCap,
-  StickyNote,
-  Search,
-  Trophy,
-  Sparkles,
-  Zap,
-  Flame,
-  BarChart3,
-  Shield,
-  Settings,
-  ChevronLeft,
-} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useStore } from "@/lib/store"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { ChevronLeft, Zap } from "lucide-react"
+import {
+  IconDashboard,
+  IconCurriculum,
+  IconRoadmap,
+  IconPlayground,
+  IconProjects,
+  IconQuiz,
+  IconNotes,
+  IconLeaderboard,
+  IconAITutor,
+  IconStats,
+  IconCertificates,
+  IconSettings,
+} from "@/components/icons"
 
 const sidebarItems = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
-  { icon: BookOpen, label: "Curriculum", href: "/curriculum" },
-  { icon: Route, label: "Roadmap", href: "/roadmap" },
-  { icon: Code2, label: "Playground", href: "/playground" },
-  { icon: Blocks, label: "Projects", href: "/projects" },
-  { icon: GraduationCap, label: "Quizzes", href: "/quiz" },
-  { icon: StickyNote, label: "Notes", href: "/notes" },
-  { icon: Trophy, label: "Achievements", href: "/leaderboard" },
-  { icon: Sparkles, label: "AI Tutor", href: "/ai-tutor" },
-  { icon: BarChart3, label: "Statistics", href: "/statistics" },
-  { icon: Shield, label: "Certificates", href: "/certificates" },
-  { icon: Settings, label: "Settings", href: "/settings" },
+  { icon: IconDashboard, label: "Dashboard", href: "/dashboard" },
+  { icon: IconCurriculum, label: "Curriculum", href: "/curriculum" },
+  { icon: IconRoadmap, label: "Roadmap", href: "/roadmap" },
+  { icon: IconPlayground, label: "Playground", href: "/playground" },
+  { icon: IconProjects, label: "Projects", href: "/projects" },
+  { icon: IconQuiz, label: "Quizzes", href: "/quiz" },
+  { icon: IconNotes, label: "Notes", href: "/notes" },
+  { icon: IconLeaderboard, label: "Achievements", href: "/leaderboard" },
+  { icon: IconAITutor, label: "AI Tutor", href: "/ai-tutor" },
+  { icon: IconStats, label: "Statistics", href: "/statistics" },
+  { icon: IconCertificates, label: "Certificates", href: "/certificates" },
+  { icon: IconSettings, label: "Settings", href: "/settings" },
 ]
 
 export function Sidebar() {
@@ -86,7 +83,7 @@ export function Sidebar() {
                     {item.label}
                     {item.label === "AI Tutor" && (
                       <span className="ml-auto flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-blue-500">
-                        <Sparkles className="h-3 w-3 text-white" />
+                        <Zap className="h-3 w-3 text-white" />
                       </span>
                     )}
                   </div>

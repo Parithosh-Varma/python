@@ -5,36 +5,35 @@ import { useStore } from "@/lib/store"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { motion, AnimatePresence } from "framer-motion"
+import { useRouter } from "next/navigation"
+import { cn } from "@/lib/utils"
 import {
-  Search,
   PanelLeftOpen,
   PanelLeftClose,
-  Sun,
-  Moon,
-  Flame,
-  Zap,
-  Bell,
   ChevronDown,
-  Settings,
-  LogOut,
-  User,
-  BookOpen,
-  Trophy,
   X,
-  CheckCircle2,
-  Sparkles,
-  MessageSquare,
-  ExternalLink,
+  LogOut,
+  Zap,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { useRouter } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import {
+  IconSearch,
+  IconSun,
+  IconMoon,
+  IconStreak,
+  IconNotifications,
+  IconUser,
+  IconLeaderboard,
+  IconCurriculum,
+  IconSettings,
+  IconCheck,
+} from "@/components/icons"
 
 const notifications = [
-  { id: 1, title: "Level Up!", desc: "You reached level 5!", time: "2m ago", icon: Trophy, color: "text-amber-400" },
-  { id: 2, title: "Streak Saved", desc: "7-day streak maintained", time: "1h ago", icon: Flame, color: "text-orange-400" },
-  { id: 3, title: "Achievement Unlocked", desc: "Completed 10 lessons", time: "3h ago", icon: CheckCircle2, color: "text-green-400" },
-  { id: 4, title: "New Lesson Available", desc: "Advanced Decorators", time: "1d ago", icon: BookOpen, color: "text-blue-400" },
+  { id: 1, title: "Level Up!", desc: "You reached level 5!", time: "2m ago", icon: IconCheck, color: "text-amber-400" },
+  { id: 2, title: "Streak Saved", desc: "7-day streak maintained", time: "1h ago", icon: IconStreak, color: "text-orange-400" },
+  { id: 3, title: "Achievement Unlocked", desc: "Completed 10 lessons", time: "3h ago", icon: IconCheck, color: "text-green-400" },
+  { id: 4, title: "New Lesson Available", desc: "Advanced Decorators", time: "1d ago", icon: IconCurriculum, color: "text-blue-400" },
 ]
 
 export function NavBar() {
@@ -62,7 +61,7 @@ export function NavBar() {
           </Button>
 
           <div className="relative hidden md:block">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search lessons, projects, notes..."
@@ -74,7 +73,7 @@ export function NavBar() {
 
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20">
-            <Flame className="h-4 w-4 text-amber-400" />
+            <IconStreak className="h-4 w-4 text-amber-400" />
             <span className="text-sm font-medium text-amber-400">{user?.streak || 0}</span>
           </div>
 
@@ -84,7 +83,7 @@ export function NavBar() {
           </div>
 
           <Button variant="ghost" size="icon" onClick={toggleTheme} className="text-muted-foreground">
-            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            {theme === "dark" ? <IconSun className="h-5 w-5" /> : <IconMoon className="h-5 w-5" />}
           </Button>
 
           {/* Notifications */}
@@ -95,7 +94,7 @@ export function NavBar() {
               className="text-muted-foreground relative"
               onClick={() => setShowNotifications(!showNotifications)}
             >
-              <Bell className="h-5 w-5" />
+              <IconNotifications className="h-5 w-5" />
               <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-purple-500" />
             </Button>
 
@@ -114,22 +113,25 @@ export function NavBar() {
                     </Button>
                   </div>
                   <div className="max-h-72 overflow-y-auto">
-                    {notifications.map((n) => (
-                      <div key={n.id} className="flex items-start gap-3 p-4 hover:bg-accent/50 transition-colors cursor-pointer border-b last:border-0">
-                        <div className="h-8 w-8 rounded-lg bg-accent/50 flex items-center justify-center flex-shrink-0">
-                          <n.icon className={`h-4 w-4 ${n.color}`} />
+                    {notifications.map((n) => {
+                      const Icon = n.icon
+                      return (
+                        <div key={n.id} className="flex items-start gap-3 p-4 hover:bg-accent/50 transition-colors cursor-pointer border-b last:border-0">
+                          <div className="h-8 w-8 rounded-lg bg-accent/50 flex items-center justify-center flex-shrink-0">
+                            <Icon className={`h-4 w-4 ${n.color}`} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium">{n.title}</p>
+                            <p className="text-xs text-muted-foreground">{n.desc}</p>
+                            <p className="text-xs text-muted-foreground mt-0.5">{n.time}</p>
+                          </div>
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium">{n.title}</p>
-                          <p className="text-xs text-muted-foreground">{n.desc}</p>
-                          <p className="text-xs text-muted-foreground mt-0.5">{n.time}</p>
-                        </div>
-                      </div>
-                    ))}
+                      )
+                    })}
                   </div>
                   <div className="p-3 border-t">
                     <Button variant="ghost" size="sm" className="w-full text-xs" onClick={() => { setShowNotifications(false); router.push("/settings") }}>
-                      <Settings className="h-3 w-3 mr-1" /> Notification Settings
+                      <IconSettings className="h-3 w-3 mr-1" /> Notification Settings
                     </Button>
                   </div>
                 </motion.div>
@@ -166,20 +168,23 @@ export function NavBar() {
                   </div>
                   <div className="p-1">
                     {[
-                      { icon: User, label: "Profile", href: "/settings" },
-                      { icon: Trophy, label: "Achievements", href: "/leaderboard" },
-                      { icon: BookOpen, label: "My Notes", href: "/notes" },
-                      { icon: Settings, label: "Settings", href: "/settings" },
-                    ].map((item) => (
-                      <button
-                        key={item.label}
-                        onClick={() => { setShowUserMenu(false); router.push(item.href) }}
-                        className="flex items-center gap-3 w-full px-3 py-2 text-sm rounded-xl hover:bg-accent transition-colors"
-                      >
-                        <item.icon className="h-4 w-4 text-muted-foreground" />
-                        {item.label}
-                      </button>
-                    ))}
+                      { icon: IconUser, label: "Profile", href: "/settings" },
+                      { icon: IconLeaderboard, label: "Achievements", href: "/leaderboard" },
+                      { icon: IconCurriculum, label: "My Notes", href: "/notes" },
+                      { icon: IconSettings, label: "Settings", href: "/settings" },
+                    ].map((item) => {
+                      const ItemIcon = item.icon
+                      return (
+                        <button
+                          key={item.label}
+                          onClick={() => { setShowUserMenu(false); router.push(item.href) }}
+                          className="flex items-center gap-3 w-full px-3 py-2 text-sm rounded-xl hover:bg-accent transition-colors"
+                        >
+                          <ItemIcon className="h-4 w-4 text-muted-foreground" />
+                          {item.label}
+                        </button>
+                      )
+                    })}
                   </div>
                   <div className="border-t p-1">
                     <button className="flex items-center gap-3 w-full px-3 py-2 text-sm rounded-xl hover:bg-accent transition-colors text-red-400">
