@@ -63,9 +63,7 @@ export default function LandingPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-xl">
         <div className="container mx-auto flex h-16 items-center justify-between px-6">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">P</span>
-            </div>
+            <img src="/logo.png" alt="Logo" className="h-8 w-8 rounded-lg" />
             <span className="font-bold text-xl bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               PyMaster
             </span>
@@ -281,10 +279,10 @@ export default function LandingPage() {
             <div className="h-6 w-6 rounded-md bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
               <span className="text-white font-bold text-xs">P</span>
             </div>
-            <span className="font-semibold">Python Master Academy</span>
+            <span className="font-semibold">PyMaster</span>
           </div>
           <p className="text-sm text-muted-foreground">
-            2026 Python Master Academy. Built with <span className="text-red-400">♥</span> for the Python community.
+            2026 PyMaster. Built with <span className="text-red-400">♥</span> for the Python community.
           </p>
           <div className="flex items-center gap-4">
             <GitBranch className="h-5 w-5 text-muted-foreground hover:text-foreground cursor-pointer" />

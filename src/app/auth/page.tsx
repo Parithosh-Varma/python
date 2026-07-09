@@ -98,11 +98,9 @@ export default function AuthPage() {
         className="relative w-full max-w-md px-4"
       >
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-500 mb-4">
-            <BookOpen className="h-7 w-7 text-white" />
-          </div>
+          <img src="/logo.png" alt="Logo" className="h-14 w-14 mx-auto mb-4 rounded-2xl" />
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Python Master Academy
+            PyMaster
           </h1>
           <p className="text-muted-foreground mt-2">
             {isLogin ? "Welcome back! Continue your journey." : "Start your Python journey today."}

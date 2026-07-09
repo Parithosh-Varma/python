@@ -47,7 +47,7 @@ def fibonacci(n):
 const sampleCodes = [
   {
     name: "Hello World",
-    code: 'print("Hello, Python Master Academy!")\nprint("Welcome to the interactive playground.")',
+    code: 'print("Hello, PyMaster!")\nprint("Welcome to the interactive playground.")',
   },
   {
     name: "Data Structures",

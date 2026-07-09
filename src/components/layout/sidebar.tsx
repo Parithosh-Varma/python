@@ -54,9 +54,7 @@ export function Sidebar() {
         >
           <div className="flex h-16 items-center justify-between px-4 border-b">
             <Link href="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">P</span>
-              </div>
+              <img src="/logo.png" alt="Logo" className="h-8 w-8 rounded-lg" />
               <span className="font-bold text-lg bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                 PyMaster
               </span>
