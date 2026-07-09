@@ -1,24 +1,20 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useRef } from "react"
 import { motion } from "framer-motion"
 import dynamic from "next/dynamic"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Play,
   RotateCcw,
-  Save,
   Copy,
   CheckCircle2,
   XCircle,
-  Clock,
-  Code2,
   FileCode,
   Terminal,
-  Share2,
+  Loader2,
 } from "lucide-react"
 import toast from "react-hot-toast"
 
@@ -30,18 +26,11 @@ const starterCode = `# Python Playground
 def greet(name):
     return f"Hello, {name}!"
 
-# Test your code
 print(greet("Python Master"))
 
-# Try some operations
 numbers = [1, 2, 3, 4, 5]
 squared = [x**2 for x in numbers]
 print(f"Squared: {squared}")
-
-# Challenge: Write a fibonacci function
-def fibonacci(n):
-    # Your code here
-    pass
 `
 
 const sampleCodes = [
@@ -51,8 +40,7 @@ const sampleCodes = [
   },
   {
     name: "Data Structures",
-    code: `# Lists, Dicts, and Sets
-fruits = ["apple", "banana", "cherry"]
+    code: `fruits = ["apple", "banana", "cherry"]
 print(f"List: {fruits}")
 
 person = {"name": "Alice", "age": 30, "city": "NYC"}
@@ -61,21 +49,17 @@ print(f"Dict: {person}")
 unique = {1, 2, 3, 3, 2, 1}
 print(f"Set (unique): {unique}")
 
-# List comprehension
 squares = [x**2 for x in range(10)]
 print(f"Squares: {squares}")`,
   },
   {
     name: "Functions",
-    code: `# Functions deep dive
-def factorial(n):
-    """Calculate factorial recursively."""
+    code: `def factorial(n):
     if n <= 1:
         return 1
     return n * factorial(n - 1)
 
 def fibonacci(n):
-    """Generate fibonacci sequence."""
     a, b = 0, 1
     result = []
     for _ in range(n):
@@ -86,14 +70,12 @@ def fibonacci(n):
 print(f"Factorial of 5: {factorial(5)}")
 print(f"Fibonacci: {fibonacci(10)}")
 
-# Lambda
 square = lambda x: x ** 2
 print(f"Lambda square: {square(12)}")`,
   },
   {
     name: "OOP",
-    code: `# Object-Oriented Programming
-class Animal:
+    code: `class Animal:
     def __init__(self, name):
         self.name = name
 
@@ -108,12 +90,10 @@ class Cat(Animal):
     def speak(self):
         return f"{self.name} says Meow!"
 
-# Polymorphism
 animals = [Dog("Rex"), Cat("Whiskers")]
 for animal in animals:
     print(animal.speak())
 
-# Dataclass
 from dataclasses import dataclass
 
 @dataclass
@@ -132,6 +112,31 @@ export default function PlaygroundPage() {
   const [output, setOutput] = useState("")
   const [isRunning, setIsRunning] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [pyodideReady, setPyodideReady] = useState(false)
+  const pyodideRef = useRef<any>(null)
+
+  const initPyodide = useCallback(async () => {
+    if (pyodideRef.current) return pyodideRef.current
+    try {
+      if (!(window as any).loadPyodide) {
+        await new Promise<void>((resolve, reject) => {
+          const script = document.createElement("script")
+          script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"
+          script.onload = () => resolve()
+          script.onerror = () => reject(new Error("Failed to load Pyodide"))
+          document.head.appendChild(script)
+        })
+      }
+      const pyodide = await (window as any).loadPyodide({
+        indexURL: "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/",
+      })
+      pyodideRef.current = pyodide
+      setPyodideReady(true)
+      return pyodide
+    } catch {
+      return null
+    }
+  }, [])
 
   const runCode = useCallback(async () => {
     setIsRunning(true)
@@ -139,33 +144,35 @@ export default function PlaygroundPage() {
     setOutput("")
 
     try {
-      // Use Pyodide or similar in production
-      // For now, simulate execution
-      const lines = code.split("\n")
-      const output_lines: string[] = []
-
-      // Simple Python simulation for demo
-      const mockOutput = [
-        "Hello, Python Master!",
-        "Squared: [1, 4, 9, 16, 25]",
-        "",
-        ">>> Code executed successfully (simulated)",
-        ">>> In production, this runs actual Python via Pyodide/WASM",
-      ]
-
-      for (const line of mockOutput) {
-        output_lines.push(line)
+      let pyodide = pyodideRef.current
+      if (!pyodide) {
+        pyodide = await initPyodide()
       }
 
-      setOutput(output_lines.join("\n"))
-      toast.success("Code executed successfully!")
+      if (pyodide) {
+        pyodide.setStdout({
+          batched: (text: string) => setOutput((prev) => prev + text + "\n"),
+        })
+        pyodide.setStderr({
+          batched: (text: string) => setError((prev) => (prev || "") + text + "\n"),
+        })
+        await pyodide.runPythonAsync(code)
+        toast.success("Code executed successfully!")
+      } else {
+        setOutput(
+          "Pyodide (Python WASM) could not be loaded.\n" +
+          "Falling back to simulated output.\n\n" +
+          ">>> " + code.split("\n").filter(l => l.trim() && !l.trim().startsWith("#")).slice(0, 3).join("\n>>> ")
+        )
+        toast("Running in simulation mode (Pyodide unavailable)", { icon: "⚠️" })
+      }
     } catch (err: any) {
       setError(err.message || "Execution failed")
       toast.error("Execution failed")
     } finally {
       setIsRunning(false)
     }
-  }, [code])
+  }, [code, initPyodide])
 
   const resetCode = () => {
     setCode(starterCode)
@@ -194,6 +201,11 @@ export default function PlaygroundPage() {
             <p className="text-muted-foreground mt-1">Write, run, and experiment with Python code</p>
           </div>
           <div className="flex items-center gap-2">
+            {!pyodideReady && (
+              <Badge variant="outline" className="text-xs gap-1">
+                <Loader2 className="h-3 w-3 animate-spin" /> Loading Python engine...
+              </Badge>
+            )}
             <Button variant="outline" size="sm" onClick={copyCode}>
               <Copy className="h-4 w-4 mr-1.5" /> Copy
             </Button>
@@ -201,13 +213,15 @@ export default function PlaygroundPage() {
               <RotateCcw className="h-4 w-4 mr-1.5" /> Reset
             </Button>
             <Button size="sm" variant="gradient" onClick={runCode} disabled={isRunning}>
-              <Play className="h-4 w-4 mr-1.5" />
-              {isRunning ? "Running..." : "Run"}
+              {isRunning ? (
+                <><Loader2 className="h-4 w-4 mr-1.5 animate-spin" /> Running...</>
+              ) : (
+                <><Play className="h-4 w-4 mr-1.5" /> Run</>
+              )}
             </Button>
           </div>
         </div>
 
-        {/* Sample Codes */}
         <div className="flex flex-wrap gap-2 mb-6">
           {sampleCodes.map((sample) => (
             <Badge
@@ -223,12 +237,11 @@ export default function PlaygroundPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Editor */}
           <Card className="lg:col-span-1">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-sm flex items-center gap-2">
-                  <Code2 className="h-4 w-4 text-blue-400" />
+                  <FileCode className="h-4 w-4 text-blue-400" />
                   main.py
                 </CardTitle>
               </div>
@@ -254,7 +267,6 @@ export default function PlaygroundPage() {
             </CardContent>
           </Card>
 
-          {/* Output */}
           <Card className="lg:col-span-1">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
@@ -274,14 +286,14 @@ export default function PlaygroundPage() {
                 {error ? (
                   <div className="text-red-400">
                     <XCircle className="h-4 w-4 inline mr-1" />
-                    {error}
+                    <pre className="whitespace-pre-wrap mt-1">{error}</pre>
                   </div>
                 ) : output ? (
                   <pre className="text-green-400 whitespace-pre-wrap">{output}</pre>
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
                     <Play className="h-8 w-8 mb-2" />
-                    <p>Click "Run" to execute your code</p>
+                    <p>Click &quot;Run&quot; to execute your code</p>
                   </div>
                 )}
               </div>

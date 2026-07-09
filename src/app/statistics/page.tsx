@@ -6,10 +6,8 @@ import { topics } from "@/lib/data/curriculum"
 import { lessons } from "@/lib/data/lessons"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { Badge } from "@/components/ui/badge"
 import { ProgressChart } from "@/components/dashboard/progress-chart"
 import {
-  BarChart3,
   TrendingUp,
   BookOpen,
   Zap,
@@ -18,7 +16,6 @@ import {
   Flame,
   GraduationCap,
   Award,
-  Brain,
   Calendar,
 } from "lucide-react"
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, PieChart, Pie, Cell } from "recharts"
@@ -50,6 +47,18 @@ export default function StatisticsPage() {
     { name: "Specializations", value: topics.filter((t) => t.category === "specialization").length, color: "#a855f7" },
   ]
 
+  const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+  const today = new Date().getDay()
+  const studyDays = progress?.completed_lessons?.length
+    ? progress.completed_lessons.slice(0, 84).reduce<Record<string, number>>((acc, _, i) => {
+        const dayIdx = (today - (i % 7) + 7) % 7
+        const weekIdx = Math.floor(i / 7)
+        const key = `${weekIdx}-${dayIdx}`
+        acc[key] = (acc[key] || 0) + 1
+        return acc
+      }, {} as Record<string, number>)
+    : {}
+
   return (
     <div className="space-y-8">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
@@ -58,7 +67,6 @@ export default function StatisticsPage() {
           <p className="text-muted-foreground mt-1">Track your learning journey</p>
         </div>
 
-        {/* Stats Overview */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
             { icon: TrendingUp, label: "Current Level", value: level, color: "from-blue-700 to-blue-400" },
@@ -66,9 +74,9 @@ export default function StatisticsPage() {
             { icon: BookOpen, label: "Lessons Done", value: completedLessons, color: "from-green-500 to-emerald-500" },
             { icon: Flame, label: "Best Streak", value: `${studyStreak} days`, color: "from-red-500 to-rose-500" },
             { icon: Clock, label: "Hours Studied", value: user?.total_hours || 0, color: "from-blue-500 to-cyan-500" },
-            { icon: Target, label: "Completion", value: `${Math.round((completedLessons / totalLessons) * 100)}%`, color: "from-blue-500 to-blue-600" },
+            { icon: Target, label: "Completion", value: `${Math.round((completedLessons / Math.max(totalLessons, 1)) * 100)}%`, color: "from-blue-500 to-blue-600" },
             { icon: GraduationCap, label: "Projects Done", value: completedProjects, color: "from-pink-500 to-rose-500" },
-            { icon: Award, label: "Avg Quiz Score", value: "85%", color: "from-teal-500 to-green-500" },
+            { icon: Award, label: "Avg Quiz Score", value: progress?.quiz_scores ? `${Math.round(Object.values(progress.quiz_scores).reduce((a, b) => a + b, 0) / Math.max(Object.keys(progress.quiz_scores).length, 1))}%` : "0%", color: "from-teal-500 to-green-500" },
           ].map((s, i) => (
             <motion.div
               key={s.label}
@@ -88,7 +96,6 @@ export default function StatisticsPage() {
           ))}
         </div>
 
-        {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <Card>
             <CardHeader>
@@ -160,32 +167,40 @@ export default function StatisticsPage() {
           </Card>
         </div>
 
-        {/* Weekly Activity */}
         <ProgressChart />
 
-        {/* XP History */}
         <Card className="mt-6">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <Calendar className="h-5 w-5 text-blue-400" />
-              Learning Heatmap
+              Learning Activity
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-7 gap-1.5">
+              {weekDays.map((day) => (
+                <div key={day} className="text-center text-xs text-muted-foreground font-medium pb-2">
+                  {day}
+                </div>
+              ))}
               {Array.from({ length: 7 * 12 }).map((_, i) => {
-                const intensity = Math.random()
+                const weekIdx = Math.floor(i / 7)
+                const dayIdx = i % 7
+                const key = `${weekIdx}-${dayIdx}`
+                const count = studyDays[key] || 0
+                const intensity = Math.min(count / 3, 1)
                 return (
                   <div
                     key={i}
                     className="aspect-square rounded-sm transition-colors"
+                    title={`${count} lessons`}
                     style={{
                       backgroundColor: intensity > 0.7
-                        ? "rgb(168, 85, 247, 0.8)"
+                        ? "rgb(59, 130, 246, 0.8)"
                         : intensity > 0.4
-                        ? "rgb(168, 85, 247, 0.4)"
-                        : intensity > 0.1
-                        ? "rgb(168, 85, 247, 0.15)"
+                        ? "rgb(59, 130, 246, 0.4)"
+                        : intensity > 0
+                        ? "rgb(59, 130, 246, 0.15)"
                         : "hsl(240 3.7% 15.9%)",
                     }}
                   />
@@ -194,16 +209,18 @@ export default function StatisticsPage() {
             </div>
             <div className="flex items-center justify-end gap-2 mt-4 text-xs text-muted-foreground">
               <span>Less</span>
-              {[0.1, 0.3, 0.5, 0.7, 0.9].map((v) => (
+              {[0, 0.3, 0.7, 1].map((v) => (
                 <div
                   key={v}
                   className="h-3 w-3 rounded-sm"
                   style={{
                     backgroundColor: v > 0.7
-                      ? "rgb(168, 85, 247, 0.8)"
+                      ? "rgb(59, 130, 246, 0.8)"
                       : v > 0.4
-                      ? "rgb(168, 85, 247, 0.4)"
-                      : "rgb(168, 85, 247, 0.15)",
+                      ? "rgb(59, 130, 246, 0.4)"
+                      : v > 0
+                      ? "rgb(59, 130, 246, 0.15)"
+                      : "hsl(240 3.7% 15.9%)",
                   }}
                 />
               ))}

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { useStore } from "@/lib/store"
 import { supabase } from "@/lib/supabase"
+import * as db from "@/lib/supabase-service"
 import {
   GitBranch,
   Mail,
@@ -50,7 +51,6 @@ export default function AuthPage() {
     setLoading(true)
     try {
       if (!supabase) {
-        // Demo mode when Supabase not configured
         await new Promise((r) => setTimeout(r, 1000))
         setUser({
           id: "demo_" + Math.random().toString(36).substring(2),
@@ -69,12 +69,12 @@ export default function AuthPage() {
         : await supabase.auth.signUp({ email, password, options: { data: { name } } })
       if (error) throw error
       if (data.user) {
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", data.user.id)
-          .single()
-        setUser(profile)
+        await db.upsertProfile({
+          id: data.user.id,
+          name: data.user.user_metadata?.name || data.user.email?.split("@")[0] || "Learner",
+          email: data.user.email || "",
+        })
+        await useStore.getState().syncFromSupabase(data.user.id)
         toast.success(isLogin ? "Welcome back!" : "Account created!")
         router.push("/dashboard")
       }

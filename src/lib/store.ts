@@ -1,6 +1,7 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import type { User, UserProgress, Note, Activity, Achievement } from "@/types"
+import * as db from "./supabase-service"
 
 interface AppState {
   user: User | null
@@ -27,6 +28,7 @@ interface AppState {
   getStreak: () => number
   getLevel: () => number
   getProgress: () => number
+  syncFromSupabase: (userId: string) => Promise<void>
 }
 
 export const useStore = create<AppState>()(
@@ -44,38 +46,60 @@ export const useStore = create<AppState>()(
       setProgress: (progress) => set({ progress }),
 
       setNotes: (notes) => set({ notes }),
-      addNote: (note) => set((state) => ({ notes: [note, ...state.notes] })),
-      updateNote: (id, updated) =>
+
+      addNote: (note) => {
+        set((state) => ({ notes: [note, ...state.notes] }))
+        const u = get().user
+        if (u && !u.id.startsWith("demo_")) {
+          db.addNote(u.id, note)
+        }
+      },
+
+      updateNote: (id, updated) => {
         set((state) => ({
           notes: state.notes.map((n) => (n.id === id ? { ...n, ...updated } : n)),
-        })),
-      deleteNote: (id) =>
+        }))
+        db.updateNote(id, updated)
+      },
+
+      deleteNote: (id) => {
         set((state) => ({
           notes: state.notes.filter((n) => n.id !== id),
-        })),
+        }))
+        db.deleteNote(id)
+      },
 
-      addActivity: (activity) =>
+      addActivity: (activity) => {
         set((state) => ({
           activities: [activity, ...state.activities].slice(0, 50),
-        })),
+        }))
+        const u = get().user
+        if (u && !u.id.startsWith("demo_")) {
+          db.addActivity(u.id, activity.type, activity.description, activity.xp_gained)
+        }
+      },
 
       setAchievements: (achievements) => set({ achievements }),
 
       addXp: (amount, source) =>
         set((state) => {
           if (!state.user) return state
+          const newXp = state.user.xp + amount
+          const newLevel = Math.max(1, Math.floor(Math.sqrt(newXp / 100)) + 1)
+          const activity: Activity = {
+            id: Math.random().toString(36).substring(2),
+            type: "lesson" as const,
+            description: `Earned ${amount} XP from ${source}`,
+            xp_gained: amount,
+            timestamp: new Date().toISOString(),
+          }
+          const u = state.user
+          if (!u.id.startsWith("demo_")) {
+            db.addXp(u.id, amount, source)
+          }
           return {
-            user: { ...state.user, xp: state.user.xp + amount },
-              activities: [
-                {
-                  id: Math.random().toString(36).substring(2),
-                  type: "lesson" as const,
-                  description: `Earned ${amount} XP from ${source}`,
-                  xp_gained: amount,
-                  timestamp: new Date().toISOString(),
-                } as Activity,
-                ...state.activities,
-              ].slice(0, 50),
+            user: { ...state.user, xp: newXp, level: newLevel },
+            activities: [activity, ...state.activities].slice(0, 50),
           }
         }),
 
@@ -91,6 +115,10 @@ export const useStore = create<AppState>()(
           if (!state.progress) return state
           const completed = new Set(state.progress.completed_lessons)
           completed.add(lessonId)
+          const u = state.user
+          if (u && !u.id.startsWith("demo_")) {
+            db.completeLesson(u.id, lessonId)
+          }
           return {
             progress: {
               ...state.progress,
@@ -104,6 +132,10 @@ export const useStore = create<AppState>()(
           if (!state.progress) return state
           const completed = new Set(state.progress.completed_projects)
           completed.add(projectId)
+          const u = state.user
+          if (u && !u.id.startsWith("demo_")) {
+            db.completeProject(u.id, projectId)
+          }
           return {
             progress: {
               ...state.progress,
@@ -115,6 +147,10 @@ export const useStore = create<AppState>()(
       updateQuizScore: (quizId, score) =>
         set((state) => {
           if (!state.progress) return state
+          const u = state.user
+          if (u && !u.id.startsWith("demo_")) {
+            db.saveQuizAttempt(u.id, quizId, score, 10, {})
+          }
           return {
             progress: {
               ...state.progress,
@@ -122,6 +158,17 @@ export const useStore = create<AppState>()(
             },
           }
         }),
+
+      syncFromSupabase: async (userId: string) => {
+        const data = await db.loadUserData(userId)
+        if (data.user) set({ user: data.user })
+        if (data.progress) set({ progress: data.progress })
+        set({
+          notes: data.notes,
+          activities: data.activities.slice(0, 50),
+          achievements: data.achievements,
+        })
+      },
 
       getStreak: () => {
         const { progress } = get()

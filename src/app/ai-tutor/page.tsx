@@ -68,79 +68,41 @@ export default function AiTutorPage() {
       timestamp: new Date().toISOString(),
     }
 
-    setMessages((prev) => [...prev, userMsg])
+    const updated = [...messages, userMsg]
+    setMessages(updated)
     setInput("")
     setIsTyping(true)
 
-    // Simulate AI response
-    setTimeout(() => {
-      const responses: Record<string, string> = {
-        decorator: `## Understanding Python Decorators
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: updated.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      })
 
-A **decorator** is a function that takes another function and extends its behavior without modifying it directly.
-
-### Simple Example:
-\`\`\`python
-def my_decorator(func):
-    def wrapper():
-        print("Something before the function")
-        func()
-        print("Something after the function")
-    return wrapper
-
-@my_decorator
-def say_hello():
-    print("Hello!")
-
-say_hello()
-\`\`\`
-
-### Output:
-\`\`\`
-Something before the function
-Hello!
-Something after the function
-\`\`\`
-
-Think of decorators like wrapping a gift - the gift (function) stays the same, but you add a nice wrapper (decorator) around it!`,
-        default: `Great question! Let me help you with that.
-
-Here's a Python example to illustrate:
-
-\`\`\`python
-# Example code
-def example_function():
-    return "This is a helpful response from your AI tutor!"
-
-print(example_function())
-\`\`\`
-
-**Key points to remember:**
-1. Practice regularly
-2. Build projects
-3. Review concepts you find difficult
-
-Would you like me to elaborate on any specific part?`,
-      }
-
-      let response = responses.default
-      for (const [key, val] of Object.entries(responses)) {
-        if (content.toLowerCase().includes(key)) {
-          response = val
-          break
-        }
-      }
+      const data = await res.json()
 
       const aiMsg: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: response,
+        content: data.content || "I wasn't able to generate a response. Please try again.",
         timestamp: new Date().toISOString(),
       }
 
       setMessages((prev) => [...prev, aiMsg])
+    } catch {
+      const fallback: Message = {
+        id: (Date.now() + 1).toString(),
+        role: "assistant",
+        content: "Sorry, I couldn't reach the AI service. Please check your connection and try again.",
+        timestamp: new Date().toISOString(),
+      }
+      setMessages((prev) => [...prev, fallback])
+    } finally {
       setIsTyping(false)
-    }, 1500)
+    }
   }
 
   const handleQuickAction = (prompt: string) => {
