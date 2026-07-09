@@ -46,7 +46,7 @@ export function Footer() {
         </div>
         <div className="border-t mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">&copy; 2026 Python Master Academy. Open source.</p>
-          <p className="text-sm text-muted-foreground">Made with ❤️ for the Python community</p>
+          <p className="text-sm text-muted-foreground">Made with <span className="text-red-400">♥</span> for the Python community</p>
         </div>
       </div>
     </footer>

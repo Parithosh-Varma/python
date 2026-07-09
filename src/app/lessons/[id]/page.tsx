@@ -27,6 +27,7 @@ import {
   GraduationCap,
   ChevronRight,
   Lightbulb,
+  XCircle,
 } from "lucide-react"
 import toast from "react-hot-toast"
 
@@ -170,8 +171,8 @@ export default function LessonPage({ params }: { params: Promise<{ id: string }>
               <CardContent className="space-y-4">
                 {lesson.common_mistakes.map((m, i) => (
                   <div key={i} className="p-4 rounded-xl border border-amber-500/20 bg-amber-500/5">
-                    <p className="text-sm font-medium text-amber-400 mb-1">❌ {m.mistake}</p>
-                    <p className="text-sm text-green-400 mb-1">✅ {m.correction}</p>
+                    <p className="text-sm font-medium text-amber-400 mb-1 flex items-center gap-1.5"><XCircle className="h-4 w-4" /> {m.mistake}</p>
+                    <p className="text-sm text-green-400 mb-1 flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" /> {m.correction}</p>
                     <p className="text-xs text-muted-foreground">{m.explanation}</p>
                   </div>
                 ))}

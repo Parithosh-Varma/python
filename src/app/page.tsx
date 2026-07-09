@@ -284,7 +284,7 @@ export default function LandingPage() {
             <span className="font-semibold">Python Master Academy</span>
           </div>
           <p className="text-sm text-muted-foreground">
-            2026 Python Master Academy. Built with ❤️ for the Python community.
+            2026 Python Master Academy. Built with <span className="text-red-400">♥</span> for the Python community.
           </p>
           <div className="flex items-center gap-4">
             <GitBranch className="h-5 w-5 text-muted-foreground hover:text-foreground cursor-pointer" />
