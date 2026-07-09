@@ -51,8 +51,9 @@ export default function DashboardPage() {
   const hoursStudied = user?.total_hours || 0
   const remaining = totalLessons - completedLessons
   const estimatedHours = remaining * 0.3
+  const completedSet = new Set(progress?.completed_lessons || [])
   const beginnerTopics = topics.filter(t => t.category === "beginner").length
-  const beginnerDone = topics.filter(t => t.category === "beginner" && t.completed_lessons === t.total_lessons).length
+  const beginnerDone = topics.filter(t => t.category === "beginner" && t.lessons.every(l => completedSet.has(l))).length
 
   return (
     <div className="space-y-8">
@@ -163,7 +164,8 @@ export default function DashboardPage() {
             <CardContent>
               <div className="space-y-4">
                 {topics.slice(0, 6).map((topic, i) => {
-                  const topicProgress = getProgressPercentage(topic.completed_lessons, topic.total_lessons)
+                  const topicDone = topic.lessons.filter(l => completedSet.has(l)).length
+                  const topicProgress = getProgressPercentage(topicDone, topic.total_lessons)
                   return (
                     <motion.div
                       key={topic.id}
@@ -178,7 +180,7 @@ export default function DashboardPage() {
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium">{topic.title}</p>
                         <p className="text-xs text-muted-foreground mt-0.5">
-                          {topic.completed_lessons}/{topic.total_lessons} lessons
+                          {topicDone}/{topic.total_lessons} lessons
                         </p>
                       </div>
                       <div className="w-24">

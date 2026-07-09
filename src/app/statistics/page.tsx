@@ -32,12 +32,16 @@ export default function StatisticsPage() {
   const completedProjects = progress?.completed_projects?.length || 0
   const studyStreak = progress?.study_streak || 0
 
-  const topicData = topics.slice(0, 8).map((t) => ({
-    name: t.title.length > 15 ? t.title.slice(0, 15) + "..." : t.title,
-    completed: t.completed_lessons,
-    total: t.total_lessons,
-    progress: Math.round((t.completed_lessons / t.total_lessons) * 100),
-  }))
+  const completedSet = new Set(progress?.completed_lessons || [])
+  const topicData = topics.slice(0, 8).map((t) => {
+    const done = t.lessons.filter(l => completedSet.has(l)).length
+    return {
+      name: t.title.length > 15 ? t.title.slice(0, 15) + "..." : t.title,
+      completed: done,
+      total: t.total_lessons,
+      progress: Math.round((done / t.total_lessons) * 100),
+    }
+  })
 
   const categoryData = [
     { name: "Beginner", value: topics.filter((t) => t.category === "beginner").length, color: "#22c55e" },

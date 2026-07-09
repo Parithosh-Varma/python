@@ -52,10 +52,12 @@ export default function AuthPage() {
     try {
       if (!supabase) {
         await new Promise((r) => setTimeout(r, 1000))
+        const userName = isLogin ? email.split("@")[0] : name
         setUser({
           id: "demo_" + Math.random().toString(36).substring(2),
           email,
-          name: isLogin ? email.split("@")[0] : name,
+          name: userName,
+          avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=022756&color=fff&bold=true`,
           xp: 0, level: 1, streak: 0, longest_streak: 0,
           total_hours: 0, completed_lessons: 0, completed_projects: 0,
           created_at: new Date().toISOString(),
@@ -69,10 +71,11 @@ export default function AuthPage() {
         : await supabase.auth.signUp({ email, password, options: { data: { name } } })
       if (error) throw error
       if (data.user) {
+        const userName = data.user.user_metadata?.name || data.user.email?.split("@")[0] || "Learner"
         await db.upsertProfile({
           id: data.user.id,
-          name: data.user.user_metadata?.name || data.user.email?.split("@")[0] || "Learner",
-          email: data.user.email || "",
+          name: userName,
+          avatar_url: data.user.user_metadata?.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=022756&color=fff&bold=true`,
         })
         await useStore.getState().syncFromSupabase(data.user.id)
         toast.success(isLogin ? "Welcome back!" : "Account created!")
