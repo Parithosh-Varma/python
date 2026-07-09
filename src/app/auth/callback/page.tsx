@@ -28,6 +28,11 @@ function CallbackHandler() {
               return
             }
             if (data.user) {
+              await db.upsertProfile({
+                id: data.user.id,
+                name: data.user.user_metadata?.name || data.user.user_metadata?.full_name || data.user.email?.split("@")[0] || "Learner",
+                avatar_url: data.user.user_metadata?.avatar_url || data.user.user_metadata?.picture || `https://ui-avatars.com/api/?name=${encodeURIComponent(data.user.email?.split("@")[0] || "Learner")}&background=022756&color=fff&bold=true`,
+              })
               await syncFromSupabase(data.user.id)
             }
             router.replace("/dashboard")
@@ -54,13 +59,19 @@ function CallbackHandler() {
         }
 
         if (data.user) {
+          await db.upsertProfile({
+            id: data.user.id,
+            name: data.user.user_metadata?.name || data.user.user_metadata?.full_name || data.user.email?.split("@")[0] || "Learner",
+            avatar_url: data.user.user_metadata?.avatar_url || data.user.user_metadata?.picture || `https://ui-avatars.com/api/?name=${encodeURIComponent(data.user.email?.split("@")[0] || "Learner")}&background=022756&color=fff&bold=true`,
+          })
           await syncFromSupabase(data.user.id)
         }
 
         router.replace("/dashboard")
       } catch (err) {
         console.error("Auth callback error:", err)
-        router.replace("/auth?error=auth_callback_error")
+        const message = err instanceof Error ? err.message : "unknown error"
+        router.replace(`/auth?error=auth_callback_error&message=${encodeURIComponent(message)}`)
       }
     })()
   }, [searchParams, router, syncFromSupabase])
